@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useContext } from "react";
+import { Menu } from "lucide-react";
 import Icons from "../../utils/icons";
 import { AuthContext } from "@/src/app/AuthProvider";
 
@@ -15,7 +16,6 @@ export default function Navbar({
 }: NavbarProps) {
   const { user, logOut } = useContext(AuthContext);
   const [profileOpen, setProfileOpen] = useState(false);
-  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
 
   const profileRef = useRef<HTMLDivElement>(null);
 
@@ -45,7 +45,7 @@ export default function Navbar({
           onClick={onMenuToggle}
           className="lg:hidden shrink-0 flex items-center justify-center w-9 h-9 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 transition-all"
         >
-          {/* <Icons.Menu className="w-5 h-5" /> */} Menu
+          <Menu className="w-5 h-5" />
         </button>
 
         <div className="min-w-0">
@@ -61,23 +61,8 @@ export default function Navbar({
         </div>
       </div>
 
-      {/* Right — search toggle (mobile) + notifications + profile */}
+      {/* Right — profile */}
       <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
-        {/* Search toggle — mobile only */}
-        <button
-          aria-label="Search"
-          onClick={() => setMobileSearchOpen((p) => !p)}
-          className="md:hidden flex items-center justify-center w-9 h-9 rounded-xl text-gray-400 hover:text-white transition-all"
-          style={{
-            background: mobileSearchOpen
-              ? "rgba(99,102,241,0.15)"
-              : "rgba(255,255,255,0.05)",
-            border: "1px solid rgba(99,102,241,0.15)",
-          }}
-        >
-          {/* <Icons.Search className="w-4 h-4" /> */} Search
-        </button>
-
         {/* Divider */}
         <div
           className="w-px h-6 hidden sm:block"
@@ -160,35 +145,6 @@ export default function Navbar({
         </div>
       </div>
 
-      {/* Mobile search bar — slides below header */}
-      {mobileSearchOpen && (
-        <div
-          className="md:hidden absolute left-0 right-0 top-16 px-3 py-3"
-          style={{
-            background: "#111827",
-            borderBottom: "1px solid rgba(99,102,241,0.15)",
-            boxShadow: "0 12px 24px rgba(0,0,0,0.35)",
-          }}
-        >
-          <div
-            className="flex items-center gap-2 w-full px-3 py-2 rounded-xl"
-            style={{
-              background: "rgba(255,255,255,0.05)",
-              border: "1px solid rgba(99,102,241,0.15)",
-            }}
-          >
-            {/* <Icons.Search className="w-4 h-4 text-gray-500 flex-shrink-0" /> */}{" "}
-            Search
-            <input
-              autoFocus
-              type="text"
-              placeholder="Search orders, items, customers..."
-              className="w-full bg-transparent text-sm text-white placeholder-gray-500 outline-none"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
-            />
-          </div>
-        </div>
-      )}
     </header>
   );
 }

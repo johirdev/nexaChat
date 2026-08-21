@@ -1,62 +1,40 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useContext, useState } from "react";
+import { useCallback, useState } from "react";
 import "./dashboard.css";
-import AuthProvider, { AuthContext } from "../AuthProvider";
-
+import AuthProvider from "../AuthProvider";
+import QueryProvider from "@/src/lib/providers/QueryProvider";
 import Sidebar from "../Layout/Admin/Sidebar/Sidebar";
 import Navbar from "../Layout/Admin/Navbar/Navbar";
 
-export default function AdminClient({
+export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const handleMenuToggle = () => setIsOpen((p) => !p);
-  const handleClose = () => setIsOpen(false);
-
-  return (
-    <AuthProvider>
-      <AdminInner
-        isOpen={isOpen}
-        handleMenuToggle={handleMenuToggle}
-        handleClose={handleClose}
-      >
-        {children}
-      </AdminInner>
-    </AuthProvider>
-  );
-}
-
-function AdminInner({ children, isOpen, handleMenuToggle, handleClose }: any) {
-  // const { token } = useContext(AuthContext);
-
-  // if (!token) return <LoginAdmin />;
+  const toggleSidebar = useCallback(() => setIsSidebarOpen((open) => !open), []);
+  const closeSidebar = useCallback(() => setIsSidebarOpen(false), []);
 
   return (
-    <div
-      className="h-screen flex flex-col bg-[#101828] text-primary overflow-hidden"
-      style={{ backgroundColor: "#101828" }}
-    >
-      {/* Top Navbar */}
-      <Navbar onMenuToggle={handleMenuToggle} />
+    <QueryProvider>
+      <AuthProvider>
+        <div className="flex h-screen flex-col overflow-hidden bg-[#0b1526] text-white">
+          <Navbar onMenuToggle={toggleSidebar} />
 
-      {/* Body */}
-      <div className="flex flex-1 overflow-hidden">
-        {/* Sidebar (FULL HEIGHT FIXED) */}
-        <div className="h-full">
-          <Sidebar isOpen={isOpen} onClose={handleClose} />
+          <div className="flex flex-1 overflow-hidden">
+            <div className="h-full">
+              <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar} />
+            </div>
+
+            {/* The only scroll area besides the sidebar rail. */}
+            <main className="h-full flex-1 overflow-y-auto p-4 pt-3">
+              {children}
+            </main>
+          </div>
         </div>
-
-        {/* Main Content (ONLY SCROLL AREA) */}
-        <main className="flex-1 h-full p-4 pt-3 overflow-y-auto">
-          {children}
-        </main>
-      </div>
-     
-    </div>
+      </AuthProvider>
+    </QueryProvider>
   );
 }
