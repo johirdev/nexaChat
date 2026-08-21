@@ -5,7 +5,7 @@ import { absoluteUrl, siteName } from "@/src/lib/seo";
 
 const title = "User guide — your first five minutes with NexaChat";
 const description =
-  "A six-step walkthrough of NexaChat: sign in with your phone number, find people, send your first message, start a group, manage members and admins, and take it with you.";
+  "A step-by-step walkthrough of NexaChat: sign in with your phone number, find people, send your first message, start a group, manage members and admins, tidy your chat list, and take it with you.";
 
 export const metadata: Metadata = {
   title: "User guide",

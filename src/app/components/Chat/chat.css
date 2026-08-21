@@ -135,6 +135,136 @@
   outline-offset: 2px;
 }
 
+/* ------------------------------------------------ list toolbar / select ---- */
+.cw-listbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  margin: 0 14px 6px;
+  padding: 7px 8px 7px 12px;
+  border: 1px solid var(--cw-line-soft);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.025);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.cw-listbar.is-picking {
+  border-color: rgba(255, 124, 155, 0.35);
+  background: var(--cw-danger-soft);
+  padding-left: 6px;
+}
+
+.cw-listbar-count {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.73rem;
+  font-weight: 600;
+  color: var(--cw-ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+.cw-listbar.is-picking .cw-listbar-count {
+  color: var(--cw-ink);
+}
+
+.cw-listbar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--cw-ink-faint);
+  font-family: inherit;
+  font-size: 0.73rem;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.cw-listbar-btn:hover:not(:disabled) {
+  background: var(--cw-hover);
+  color: var(--cw-ink);
+}
+.cw-listbar-btn.is-text:hover:not(:disabled) {
+  color: var(--cw-cyan);
+}
+.cw-listbar-btn.is-danger {
+  color: var(--cw-danger);
+}
+.cw-listbar-btn.is-danger:hover:not(:disabled) {
+  background: rgba(255, 124, 155, 0.18);
+  color: var(--cw-danger);
+}
+.cw-listbar-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.cw-listbar-btn:focus-visible {
+  outline: 2px solid var(--cw-cyan);
+  outline-offset: 1px;
+}
+
+/* the checkbox that appears on each row while picking */
+.cw-conv-check {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid var(--cw-line);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.28);
+  color: transparent;
+  flex-shrink: 0;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.cw-conv.is-checked .cw-conv-check {
+  background: var(--cw-danger);
+  border-color: var(--cw-danger);
+  color: #04121c;
+}
+.cw-conv.is-checked {
+  background: var(--cw-danger-soft);
+}
+.cw-conv.is-picking:hover {
+  background: var(--cw-hover);
+}
+.cw-conv.is-checked:hover {
+  background: rgba(255, 124, 155, 0.18);
+}
+
+/* restore line under the list */
+.cw-hidden-note {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 14px 4px 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--cw-line-soft);
+  color: var(--cw-ink-faint);
+  font-size: 0.7rem;
+}
+.cw-hidden-note button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+  padding: 4px 9px;
+  border: 1px solid var(--cw-line-soft);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--cw-ink-soft);
+  font-family: inherit;
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.cw-hidden-note button:hover {
+  border-color: var(--cw-cyan);
+  color: var(--cw-cyan);
+}
+
 /* ------------------------------------------------------- conversations ---- */
 .cw-conv {
   position: relative;

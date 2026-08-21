@@ -8,7 +8,9 @@ import PeopleList from "@/src/app/components/Users/PeopleList";
 import UserAvatar from "@/src/app/components/Users/UserAvatar";
 import type { Conversation } from "@/src/types/chat";
 import type { User } from "@/src/types/user";
-import ConversationList from "./ConversationList";
+import ConversationList, {
+  type ConversationSelection,
+} from "./ConversationList";
 import Link from "next/link";
 import MyProfilePage from "./MyProfilePage";
 
@@ -26,6 +28,7 @@ interface ChatRailProps {
   onSelectPerson: (user: User) => void;
   onNewGroup: () => void;
   onRetry: () => void;
+  selection: ConversationSelection;
 }
 
 export default function ChatRail({
@@ -40,6 +43,7 @@ export default function ChatRail({
   onSelectPerson,
   onNewGroup,
   onRetry,
+  selection,
 }: ChatRailProps) {
   const { user, logOut } = useContext(AuthContext);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -118,6 +122,7 @@ export default function ChatRail({
             onSelect={onSelectConversation}
             onRetry={onRetry}
             onBrowsePeople={() => onTabChange("people")}
+            {...selection}
           />
         </div>
       ) : (

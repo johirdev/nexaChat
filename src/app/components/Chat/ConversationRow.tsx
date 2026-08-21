@@ -1,7 +1,7 @@
 "use client";
 
 import { memo } from "react";
-import { Users } from "lucide-react";
+import { Check, Users } from "lucide-react";
 import UserAvatar from "@/src/app/components/Users/UserAvatar";
 import { formatListTimestamp } from "@/src/lib/format";
 import type { Conversation } from "@/src/types/chat";
@@ -11,6 +11,10 @@ interface ConversationRowProps {
   isActive: boolean;
   currentUserId: string | undefined;
   onSelect: (conversation: Conversation) => void;
+  /** When true the row picks rather than opens. */
+  selectionMode?: boolean;
+  isChecked?: boolean;
+  onToggleCheck?: (id: string) => void;
 }
 
 function previewOf(
@@ -53,17 +57,44 @@ function ConversationRow({
   isActive,
   currentUserId,
   onSelect,
+  selectionMode = false,
+  isChecked = false,
+  onToggleCheck,
 }: ConversationRowProps) {
   const isGroup = conversation.type === "group";
+
+  const handleClick = () => {
+    if (selectionMode) {
+      onToggleCheck?.(conversation.id);
+      return;
+    }
+    onSelect(conversation);
+  };
+
+  const classNames = [
+    "cw-conv",
+    isActive && !selectionMode ? "is-active" : "",
+    selectionMode ? "is-picking" : "",
+    isChecked ? "is-checked" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <li>
       <button
         type="button"
-        className={`cw-conv${isActive ? " is-active" : ""}`}
-        onClick={() => onSelect(conversation)}
-        aria-current={isActive ? "true" : undefined}
+        className={classNames}
+        onClick={handleClick}
+        aria-current={isActive && !selectionMode ? "true" : undefined}
+        aria-pressed={selectionMode ? isChecked : undefined}
       >
+        {selectionMode && (
+          <span className="cw-conv-check" aria-hidden="true">
+            <Check size={12} />
+          </span>
+        )}
+
         <span className="cw-avatar-wrap">
           <UserAvatar id={conversation.avatarSeed} name={conversation.title} />
           {isGroup && (

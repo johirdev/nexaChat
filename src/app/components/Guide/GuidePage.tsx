@@ -11,6 +11,7 @@ import {
   RefreshCw,
   ShieldCheck,
   Sparkles,
+  Trash2,
   TriangleAlert,
   Wifi,
 } from "lucide-react";
@@ -137,9 +138,32 @@ export const STEPS: GuideStep[] = [
     alt: "A group conversation with the member and admin panel open",
   },
   {
+    title: "Tidy your list",
+    hint: "Select several chats, remove them together",
+    kicker: "Step six",
+    heading: "Clear out the chats you are done with",
+    body: "Press Select at the top of the Chats tab and a tick box appears on every row. Choose as many as you like — direct chats and groups can be mixed — then press Delete and they all disappear from your rail at once.",
+    notices: [
+      {
+        title: "All or none in one tap",
+        text: "the All button ticks every visible chat, and tapping it again clears the lot",
+      },
+      {
+        title: "This is your list, not the server",
+        text: "removing a chat hides it for you; nobody else notices and no message is destroyed",
+      },
+      {
+        title: "Restore whenever you want",
+        text: "a Restore link sits under the list, and a fresh session brings everything back anyway",
+      },
+    ],
+    image: "/images/guide-select.svg",
+    alt: "Selection mode in the chat rail with two conversations ticked and a delete button ready",
+  },
+  {
     title: "Take it anywhere",
     hint: "Same session on every screen",
-    kicker: "Step six",
+    kicker: "Step seven",
     heading: "Carry it in your pocket",
     body: "NexaChat runs in the browser you already have — nothing to install and nothing to update. On a phone you get one pane at a time, list then conversation, the way a messenger should behave. On a laptop you see both side by side, plus the group panel.",
     notices: [
@@ -215,6 +239,11 @@ const TIPS = [
     body: "The group panel marks every admin. If the add and remove controls are missing, you are a member rather than an admin in that room.",
   },
   {
+    icon: Trash2,
+    title: "Deleting is local",
+    body: "Select and Delete tidy your own rail. The messages stay on the server, the other person sees nothing change, and Restore puts everything back.",
+  },
+  {
     icon: LogOut,
     title: "Signing out",
     body: "The button beside your name at the bottom of the rail clears the session on this device. Your conversations stay waiting for next time.",
@@ -243,6 +272,10 @@ export const TROUBLE = [
     q: "I was removed from a group by mistake",
     a: "The conversation disappears from your rail the moment it happens. Only an admin of that group can add you back — message one of them directly and they can do it from the group panel.",
   },
+  {
+    q: "I deleted a chat — is it gone for good?",
+    a: "No. Deleting from the Chats tab removes a conversation from your own list and nothing else: the messages stay on the server, the other person sees no change, and the group carries on without you noticing anything. Use the Restore link under the list to bring them straight back, and in any case a fresh session starts with the full list again. If you actually want out of a group, open its info panel and use Leave group instead.",
+  },
 ];
 
 export default function GuidePage() {
@@ -264,14 +297,14 @@ export default function GuidePage() {
           </h1>
 
           <p className="ln-sub" style={{ marginInline: "auto" }}>
-            Six short steps from an empty screen to a live group conversation.
+            Seven short steps from an empty screen to a live group conversation.
             Follow along here, then do the same thing for real — it takes about as
             long as reading this page.
           </p>
 
           <div className="gd-meta">
             <span>
-              <Sparkles size={14} aria-hidden="true" /> 6 steps
+              <Sparkles size={14} aria-hidden="true" /> {STEPS.length} steps
             </span>
             <span>
               <Clock size={14} aria-hidden="true" /> About 5 minutes

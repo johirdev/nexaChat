@@ -153,47 +153,45 @@ export default function MessageComposer({
     setPlayingId(null);
   }, []);
 
-  const handleFiles = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      const picked = Array.from(event.target.files ?? []);
-      // Let the same file be chosen twice in a row.
-      event.target.value = "";
-      if (picked.length === 0) return;
+  const handleFiles = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    const picked = Array.from(event.target.files ?? []);
+    // Let the same file be chosen twice in a row.
+    event.target.value = "";
+    if (picked.length === 0) return;
 
-      const accepted: Attachment[] = [];
-      let rejection: string | null = null;
+    const accepted: Attachment[] = [];
+    let rejection: string | null = null;
 
-      for (const file of picked) {
-        if (!file.type.startsWith("image/")) {
-          rejection = "Only images can be attached right now.";
-          continue;
-        }
-        if (file.size > MAX_IMAGE_BYTES) {
-          rejection = `${file.name} is larger than 5 MB.`;
-          continue;
-        }
-        accepted.push({
-          kind: "image",
-          id: newId(),
-          url: URL.createObjectURL(file),
-          name: file.name,
-          size: file.size,
-        });
+    for (const file of picked) {
+      if (!file.type.startsWith("image/")) {
+        rejection = "Only images can be attached right now.";
+        continue;
       }
-
-      setAttachments((current) => {
-        const room = MAX_IMAGES - current.filter((a) => a.kind === "image").length;
-        if (accepted.length > room) {
-          rejection = `You can attach up to ${MAX_IMAGES} images.`;
-          accepted.slice(room).forEach((item) => URL.revokeObjectURL(item.url));
-        }
-        return [...current, ...accepted.slice(0, Math.max(room, 0))];
+      if (file.size > MAX_IMAGE_BYTES) {
+        rejection = `${file.name} is larger than 5 MB.`;
+        continue;
+      }
+      accepted.push({
+        kind: "image",
+        id: newId(),
+        url: URL.createObjectURL(file),
+        name: file.name,
+        size: file.size,
       });
+    }
 
-      setFileError(rejection);
-    },
-    [],
-  );
+    setAttachments((current) => {
+      const room =
+        MAX_IMAGES - current.filter((a) => a.kind === "image").length;
+      if (accepted.length > room) {
+        rejection = `You can attach up to ${MAX_IMAGES} images.`;
+        accepted.slice(room).forEach((item) => URL.revokeObjectURL(item.url));
+      }
+      return [...current, ...accepted.slice(0, Math.max(room, 0))];
+    });
+
+    setFileError(rejection);
+  }, []);
 
   const togglePlayback = useCallback(
     (attachment: Attachment) => {
@@ -255,6 +253,11 @@ export default function MessageComposer({
   }, [recorder.levels, recorder.barCount]);
 
   const banner = fileError ?? recorder.error ?? notice ?? null;
+  // The recipient name is used in the placeholder and aria-label, so it should
+  const displayRecipientName =
+    recipientName.length > 16
+      ? `${recipientName.split(" ")[0]}...`
+      : recipientName;
 
   return (
     <div className="cw-composer">
@@ -265,12 +268,19 @@ export default function MessageComposer({
         <div className="cw-tray">
           <p className="cw-tray-head">
             <span>
-              {attachments.length} attachment{attachments.length === 1 ? "" : "s"}
+              {attachments.length} attachment
+              {attachments.length === 1 ? "" : "s"}
             </span>
-            <button type="button" className="cw-tray-clear" onClick={clearAttachments}>
+            <button
+              type="button"
+              className="cw-tray-clear"
+              onClick={clearAttachments}
+            >
               Clear all
             </button>
-            <span className="cw-tray-note">Preview only — uploads need a server endpoint</span>
+            <span className="cw-tray-note">
+              Preview only — uploads need a server endpoint
+            </span>
           </p>
 
           <div className="cw-tray-items">
@@ -298,7 +308,9 @@ export default function MessageComposer({
                     className="cw-voice-play"
                     onClick={() => togglePlayback(attachment)}
                     aria-label={
-                      playingId === attachment.id ? "Pause voice note" : "Play voice note"
+                      playingId === attachment.id
+                        ? "Pause voice note"
+                        : "Play voice note"
                     }
                   >
                     {playingId === attachment.id ? (
@@ -345,12 +357,19 @@ export default function MessageComposer({
 
           <span className="cw-rec-wave" aria-hidden="true">
             {recordingBars.map((level, i) => (
-              <i key={i} style={{ height: `${Math.max(level, 0.06) * 100}%` }} />
+              <i
+                key={i}
+                style={{ height: `${Math.max(level, 0.06) * 100}%` }}
+              />
             ))}
           </span>
 
           <span className="cw-rec-limit" aria-hidden="true">
-            <i style={{ width: `${(recorder.elapsedMs / MAX_RECORDING_MS) * 100}%` }} />
+            <i
+              style={{
+                width: `${(recorder.elapsedMs / MAX_RECORDING_MS) * 100}%`,
+              }}
+            />
           </span>
 
           <button
@@ -418,7 +437,7 @@ export default function MessageComposer({
             value={text}
             onChange={(event) => setText(event.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder={`Message ${recipientName}`}
+            placeholder={`Message ${displayRecipientName}`}
             aria-label={`Message ${recipientName}`}
             disabled={disabled}
             autoFocus
@@ -445,8 +464,8 @@ export default function MessageComposer({
 
       <p className="cw-composer-hint">
         <span>
-          <kbd>Enter</kbd> to send &middot; <kbd>Shift</kbd>+<kbd>Enter</kbd> for a
-          new line
+          <kbd>Enter</kbd> to send &middot; <kbd>Shift</kbd>+<kbd>Enter</kbd>{" "}
+          for a new line
         </span>
         {recorder.isRequesting && <span>Waiting for the microphone…</span>}
       </p>

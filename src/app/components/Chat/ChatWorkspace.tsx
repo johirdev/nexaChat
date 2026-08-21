@@ -8,6 +8,7 @@ import {
   useConversations,
   useStartDirectConversation,
 } from "@/src/hooks/useConversations";
+import useHiddenConversations from "@/src/hooks/useHiddenConversations";
 import type { Conversation } from "@/src/types/chat";
 import type { User } from "@/src/types/user";
 import ChatRail, { type RailTab } from "./ChatRail";
@@ -33,8 +34,21 @@ export default function ChatWorkspace() {
   // conversation list has come back.
   const [provisional, setProvisional] = useState<Conversation | null>(null);
 
+  const [selectionMode, setSelectionMode] = useState(false);
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+
   const { conversations, isLoading, error, refetch } = useConversations();
   const startDirect = useStartDirectConversation();
+
+  // Removal is a local, session-scoped decision: the API exposes no delete.
+  const { hiddenIds, hiddenCount, hide, restoreAll } = useHiddenConversations(
+    user?._id,
+  );
+
+  const visibleConversations = useMemo(
+    () => conversations.filter((conversation) => !hiddenIds.has(conversation.id)),
+    [conversations, hiddenIds],
+  );
 
   const closeConversation = useCallback((conversationId: string) => {
     setActiveId((current) => (current === conversationId ? null : current));
@@ -57,6 +71,59 @@ export default function ChatWorkspace() {
     setActiveId(conversation.id);
     setIsInfoOpen(false);
   }, []);
+
+  /* ---------------------------------------------------------- multi-select */
+  const exitSelection = useCallback(() => {
+    setSelectionMode(false);
+    setSelectedIds(new Set());
+  }, []);
+
+  const toggleCheck = useCallback((id: string) => {
+    setSelectedIds((current) => {
+      const next = new Set(current);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      return next;
+    });
+  }, []);
+
+  const selectAll = useCallback(() => {
+    setSelectedIds((current) =>
+      current.size === visibleConversations.length
+        ? new Set()
+        : new Set(visibleConversations.map((conversation) => conversation.id)),
+    );
+  }, [visibleConversations]);
+
+  const deleteSelected = useCallback(() => {
+    const ids = [...selectedIds];
+    if (ids.length === 0) return;
+
+    hide(ids);
+    // A removed thread must not stay open in the pane beside the list.
+    setActiveId((current) => (current && ids.includes(current) ? null : current));
+    exitSelection();
+  }, [selectedIds, hide, exitSelection]);
+
+  const restoreHidden = useCallback(() => {
+    restoreAll();
+    exitSelection();
+  }, [restoreAll, exitSelection]);
+
+  const selection = {
+    selectionMode,
+    selectedIds,
+    hiddenCount,
+    onEnterSelection: () => setSelectionMode(true),
+    onExitSelection: exitSelection,
+    onToggleCheck: toggleCheck,
+    onSelectAll: selectAll,
+    onDeleteSelected: deleteSelected,
+    onRestoreHidden: restoreHidden,
+  };
 
   // Deliberately not wrapped in useCallback: it closes over the mutation object,
   // whose identity changes every render, so memoising it would be a lie. Its
@@ -110,7 +177,8 @@ export default function ChatWorkspace() {
       <ChatRail
         tab={tab}
         onTabChange={setTab}
-        conversations={conversations}
+        selection={selection}
+        conversations={visibleConversations}
         activeConversationId={activeId}
         isLoading={isLoading}
         error={error}
