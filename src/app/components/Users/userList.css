@@ -25,7 +25,7 @@
   background: linear-gradient(180deg, #0c1729 0%, #0b1526 55%, #0a1322 100%);
   border-right: 1px solid var(--ul-line-soft);
   color: var(--ul-ink);
-  font-family: "DM Sans", "Segoe UI", system-ui, sans-serif;
+  font-family: var(--font-dm-sans), "Segoe UI", system-ui, sans-serif;
 }
 
 /* --------------------------------------------------------------- brand ---- */
@@ -308,6 +308,19 @@
   flex-shrink: 0;
   user-select: none;
 }
+.ul-avatar.is-clickable {
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+.ul-avatar.is-clickable:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 16px rgba(45, 224, 196, 0.2);
+}
+.ul-avatar.is-clickable:focus-visible {
+  outline: 2px solid var(--ul-cyan);
+  outline-offset: 3px;
+}
 
 .ul-avatar-dot {
   position: absolute;
@@ -346,7 +359,8 @@
 .ul-phone {
   font-size: 0.715rem;
   color: var(--ul-ink-faint);
-  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-family: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Consolas,
+    monospace;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.01em;
   white-space: nowrap;
@@ -521,7 +535,31 @@
 .ul-me:hover {
   background: var(--ul-bg-hover);
 }
+.ul-avatar {
+  position: relative;
+}
 
+.ul-avatar-crown {
+  position: absolute;
+  bottom: -4px;
+  right: -6px;
+  width: 16px;
+  height: 16px;
+  color: #fff;
+  background: radial-gradient(circle, #e4e0ff 0%, #f9dd7a 60%, #e0a42c00 100%);
+  border-radius: 50%;
+  padding: 2px;
+  box-sizing: content-box;
+  border: 0;
+  cursor: default;
+  pointer-events: none;
+  z-index: 1;
+  /* filter: drop-shadow(0 0 3px rgba(245, 196, 69, 0.75)); */
+}
+.ul-avatar-crown.is-clickable {
+  cursor: pointer;
+  pointer-events: auto;
+}
 .ul-me-body {
   min-width: 0;
   flex: 1;

@@ -1,16 +1,26 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AxiosError } from "axios";
-import { ArrowRight, LoaderCircle, LockKeyhole, } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Check,
+  LoaderCircle,
+  LockKeyhole,
+  Phone,
+  TriangleAlert,
+  User,
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { api } from "@/src/lib/api";
 import { LoginResponse, saveAuthSession } from "@/src/lib/auth";
-import Link from "next/link";
-import Image from "next/image";
+import { getApiErrorMessage, getApiFieldErrors } from "@/src/lib/errors";
+import "@/src/app/components/HomeLandingPage/landing.css";
 
 const loginSchema = z.object({
   name: z
@@ -28,12 +38,29 @@ const loginSchema = z.object({
 
 type LoginFormValues = z.infer<typeof loginSchema>;
 
+const PITCH = [
+  {
+    title: "No password to invent",
+    text: "your phone number is the account",
+  },
+  {
+    title: "New number? Account created",
+    text: "known number signs you straight in",
+  },
+  {
+    title: "Straight into your conversations",
+    text: "direct chats and groups, delivered live",
+  },
+];
+
 const LoginForm = () => {
   const router = useRouter();
   const [submitError, setSubmitError] = useState<string | null>(null);
+
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -53,111 +80,184 @@ const LoginForm = () => {
       router.push("/dashboard");
       router.refresh();
     } catch (error) {
-      const responseError = error as AxiosError<{ message?: string }>;
+      // The API nests failures under `error`, and validation problems arrive
+      // with a per-field `details` array — put those on the fields themselves.
+      const fieldErrors = getApiFieldErrors(error);
+      let matchedAField = false;
+
+      for (const detail of fieldErrors) {
+        if (detail.path === "name" || detail.path === "phone") {
+          setError(detail.path, { type: "server", message: detail.message });
+          matchedAField = true;
+        }
+      }
+
       setSubmitError(
-        responseError.response?.data?.message ??
-          "We could not sign you in right now. Please check your details and try again.",
+        matchedAField
+          ? null
+          : getApiErrorMessage(
+              error,
+              "We could not sign you in right now. Please check your details and try again.",
+            ),
       );
     }
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-background px-5 py-12">
-      <section className="site-card w-full max-w-md p-7 shadow-2xl sm:p-9">
-        <div className="mb-3 flex flex items-center justify-center gap-0">
-          <Link href="/" className="site-brand flex-col gap-0!" aria-label="NexaChat home">
-            <Image width={60} height={60} src="/nexaChat.png" alt="NexaChat" />{" "}
-              <span>
-                Nexa<span>Chat</span>
-              </span>
-          </Link>
+    <section className="ln-auth">
+      <div className="ln-auth-grid" aria-hidden="true" />
+
+      <div className="ln-wrap ln-auth-inner">
+        {/* ------------------------------------------------------- pitch */}
+        <div className="ln-auth-pitch">
+          <span className="ln-eyebrow">Welcome back</span>
+          <h1>
+            One number away from{" "}
+            <span className="ln-brand-text">your people</span>.
+          </h1>
+          <p className="ln-sub">
+            NexaChat has no sign-up form to fill in and no password to remember.
+            Give us a number and a name, and your conversations open up.
+          </p>
+
+          <ul className="ln-checks">
+            {PITCH.map((item) => (
+              <li key={item.title}>
+                <Check size={17} aria-hidden="true" />
+                <span>
+                  <b>{item.title}</b> — {item.text}
+                </span>
+              </li>
+            ))}
+          </ul>
+
+          <div className="ln-auth-proof">
+            <span className="ln-faces" aria-hidden="true">
+              <i style={{ background: "linear-gradient(135deg,#1fd1b4,#35d0e0)" }}>J</i>
+              <i style={{ background: "linear-gradient(135deg,#35d0e0,#4a8cf7)" }}>M</i>
+              <i style={{ background: "linear-gradient(135deg,#4a8cf7,#8b4dff)", color: "#fff" }}>
+                S
+              </i>
+              <i style={{ background: "#131d3d", color: "#35d0e0" }}>+</i>
+            </span>
+            <span>
+              <strong>12k+</strong> people are already talking on NexaChat
+            </span>
+          </div>
         </div>
 
-        <div className="mb-1">
-          <div className="mb-3 flex max-w-[160px] mx-auto justify-center items-center gap-2 rounded-full bg-cyan-soft px-3 py-1 text-xs font-semibold text-cyan">
-            <LockKeyhole size={13} /> Secure access
+        {/* -------------------------------------------------------- card */}
+        <div className="ln-auth-card">
+          <Link href="/" className="ln-auth-mark" aria-label="NexaChat home">
+            <Image
+              src="/nexaChat.png"
+              alt=""
+              width={58}
+              height={58}
+              priority
+            />
+            <span>
+              Nexa<em>Chat</em>
+            </span>
+          </Link>
+
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <span className="ln-auth-badge">
+              <LockKeyhole size={12} aria-hidden="true" /> Secure access
+            </span>
           </div>
-         
-          <p className="mt-2 text-sm max-w-[80%] mx-auto text-center leading-6 text-ink-soft">
+
+          <p className="ln-auth-intro">
             Use your phone number to sign in or create your NexaChat account.
           </p>
+
+          <form className="ln-auth-form" onSubmit={handleSubmit(onSubmit)} noValidate>
+            <div className="ln-field">
+              <label className="ln-label" htmlFor="name">
+                Your name
+              </label>
+              <div className="ln-input-wrap">
+                <User size={16} aria-hidden="true" />
+                <input
+                  id="name"
+                  autoComplete="name"
+                  className={`ln-input${errors.name ? " has-error" : ""}`}
+                  placeholder="Johirul Islam"
+                  aria-invalid={Boolean(errors.name)}
+                  aria-describedby={errors.name ? "name-error" : undefined}
+                  {...register("name")}
+                />
+              </div>
+              {errors.name && (
+                <p className="ln-error" id="name-error">
+                  {errors.name.message}
+                </p>
+              )}
+            </div>
+
+            <div className="ln-field">
+              <label className="ln-label" htmlFor="phone">
+                Phone number
+              </label>
+              <div className="ln-input-wrap">
+                <Phone size={16} aria-hidden="true" />
+                <input
+                  id="phone"
+                  type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
+                  className={`ln-input${errors.phone ? " has-error" : ""}`}
+                  placeholder="018XXXXXXXX"
+                  aria-invalid={Boolean(errors.phone)}
+                  aria-describedby={errors.phone ? "phone-error" : undefined}
+                  {...register("phone")}
+                />
+              </div>
+              {errors.phone && (
+                <p className="ln-error" id="phone-error">
+                  {errors.phone.message}
+                </p>
+              )}
+            </div>
+
+            {submitError && (
+              <p className="ln-alert" role="alert">
+                <TriangleAlert size={15} aria-hidden="true" />
+                {submitError}
+              </p>
+            )}
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="ln-btn ln-btn-primary ln-auth-submit"
+            >
+              {isSubmitting ? (
+                <>
+                  <LoaderCircle className="animate-spin" size={17} />
+                  Signing you in
+                </>
+              ) : (
+                <>
+                  Continue <ArrowRight size={16} />
+                </>
+              )}
+            </button>
+          </form>
+
+          <p className="ln-auth-foot">
+            New phone numbers are registered automatically. By continuing you
+            agree to use NexaChat responsibly.
+          </p>
+
+          <div style={{ textAlign: "center" }}>
+            <Link href="/" className="ln-auth-back">
+              <ArrowLeft size={14} aria-hidden="true" /> Back to home
+            </Link>
+          </div>
         </div>
-
-        <form
-          className="space-y-5"
-          onSubmit={handleSubmit(onSubmit)}
-          noValidate
-        >
-          <div>
-            <label
-              className="mb-2 block text-sm font-semibold text-ink"
-              htmlFor="name"
-            >
-              Your name
-            </label>
-            <input
-              id="name"
-              autoComplete="name"
-              className={`site-input w-full px-4 py-3 text-sm ${errors.name ? "border-danger" : ""}`}
-              placeholder="Johirul Islam"
-              {...register("name")}
-            />
-            {errors.name && (
-              <p className="mt-2 text-xs text-danger">{errors.name.message}</p>
-            )}
-          </div>
-
-          <div>
-            <label
-              className="mb-2 block text-sm font-semibold text-ink"
-              htmlFor="phone"
-            >
-              Phone number
-            </label>
-            <input
-              id="phone"
-              type="tel"
-              inputMode="tel"
-              autoComplete="tel"
-              className={`site-input w-full px-4 py-3 text-sm ${errors.phone ? "border-danger" : ""}`}
-              placeholder="018XXXXXXXX"
-              {...register("phone")}
-            />
-            {errors.phone && (
-              <p className="mt-2 text-xs text-danger">{errors.phone.message}</p>
-            )}
-          </div>
-
-          {submitError && (
-            <p
-              role="alert"
-              className="rounded-sm border border-danger/30 bg-danger/10 px-3 py-2 text-sm text-danger"
-            >
-              {submitError}
-            </p>
-          )}
-
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="site-btn cursor-pointer site-btn-primary flex w-full justify-center px-4 py-3 text-sm"
-          >
-            {isSubmitting ? (
-              <LoaderCircle className="animate-spin" size={18} />
-            ) : (
-              <>
-                Continue <ArrowRight size={17} />
-              </>
-            )}
-          </button>
-        </form>
-
-        <p className="mt-6 text-center text-xs leading-5 text-ink-faint">
-          New phone numbers are registered automatically. By continuing, you
-          agree to use NexaChat responsibly.
-        </p>
-      </section>
-    </main>
+      </div>
+    </section>
   );
 };
 

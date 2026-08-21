@@ -1,36 +1,29 @@
-import type { Metadata, Viewport } from "next";
-import { Montserrat } from "next/font/google";
+import { Hind_Siliguri, Inter } from "next/font/google";
 import "../globals.css";
 
 import Navbar from "../Layout/Client/Navbar/Navbar";
 import Footer from "../Layout/Client/Footer/Footer";
 import AuthProvider from "../AuthProvider";
 
-const montserrat = Montserrat({
+// Inter carries the Latin text; Hind Siliguri covers Bengali so a mixed line
+// keeps one optical weight instead of falling back to a system face.
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "900"],
-  style: ["normal"],
-  variable: "--font-montserrat",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
   display: "swap",
 });
 
-const siteUrl = "https://nexaChat.com";
+const hindSiliguri = Hind_Siliguri({
+  subsets: ["bengali", "latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-hind-siliguri",
+  display: "swap",
+});
 
-export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-
-  title: {
-    default: "NexaChat | conversations in motion",
-    template: "%s | NexaChat",
-  },
-  description: "A clearer, faster way to stay close to your people.",
-};
-
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  themeColor: "#07111f",
-};
+/* Metadata, viewport and the social card all live in the root layout so there
+   is a single canonical definition; pages below override only their own title,
+   description and canonical URL. */
 
 export default function SiteLayout({
   children,
@@ -39,9 +32,10 @@ export default function SiteLayout({
 }>) {
   return (
     <div
-      className={`${montserrat.variable} min-h-full flex flex-col font-montserrat`}
+      className={`${inter.variable} ${hindSiliguri.variable} ln-site min-h-full flex flex-col`}
     >
-      <AuthProvider>
+      {/* Public pages: read the session, never redirect on the absence of one. */}
+      <AuthProvider requireAuth={false}>
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

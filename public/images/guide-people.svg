@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="900" height="600" role="img" aria-label="The People tab in NexaChat, filtered by a search term with matching names highlighted">
+  <defs>
+    <linearGradient id="pa1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1fd1b4"/><stop offset="1" stop-color="#35d0e0"/></linearGradient>
+    <linearGradient id="pa2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4a8cf7"/><stop offset="1" stop-color="#8b4dff"/></linearGradient>
+    <linearGradient id="pa3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f5a524"/><stop offset="1" stop-color="#f76b1c"/></linearGradient>
+    <linearGradient id="pa4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#37d67a"/><stop offset="1" stop-color="#0aa06e"/></linearGradient>
+    <linearGradient id="pa5" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff7c9b"/><stop offset="1" stop-color="#e0396c"/></linearGradient>
+    <linearGradient id="paGlow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8b4dff" stop-opacity=".14"/><stop offset="1" stop-color="#1fd1b4" stop-opacity=".05"/>
+    </linearGradient>
+    <clipPath id="paFrame"><rect width="900" height="600" rx="18"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#paFrame)" font-family="Inter, 'Segoe UI', system-ui, sans-serif">
+    <rect width="900" height="600" fill="#0a1728"/>
+    <rect x="316" width="584" height="600" fill="url(#paGlow)"/>
+
+    <!-- ============================ RAIL ============================ -->
+    <rect width="316" height="600" fill="#0b1526"/>
+    <line x1="316" y1="0" x2="316" y2="600" stroke="#1a2c4a"/>
+
+    <!-- brand -->
+    <rect x="20" y="18" width="34" height="34" rx="10" fill="rgba(31,209,180,.12)"/>
+    <circle cx="37" cy="35" r="8" fill="none" stroke="#1fd1b4" stroke-width="2.4"/>
+    <circle cx="37" cy="35" r="2.6" fill="#1fd1b4"/>
+    <text x="66" y="33" fill="#f2f6ff" font-size="15" font-weight="700" letter-spacing="-.3">Nexa<tspan fill="#35d0e0">Chat</tspan></text>
+    <text x="66" y="48" fill="#7386ac" font-size="9" font-weight="600" letter-spacing="1.4">DIRECTORY</text>
+    <line x1="0" y1="72" x2="316" y2="72" stroke="#1a2c4a"/>
+
+    <!-- tabs — People active -->
+    <text x="34" y="101" fill="#7386ac" font-size="12" font-weight="600">Chats</text>
+    <text x="130" y="101" fill="#35d0e0" font-size="12" font-weight="600">People</text>
+    <rect x="126" y="110" width="48" height="2" rx="1" fill="#35d0e0"/>
+
+    <!-- search field, focused, with a term typed -->
+    <rect x="13" y="124" width="290" height="46" rx="14" fill="rgba(53,208,224,.12)"/>
+    <rect x="16" y="127" width="284" height="40" rx="12" fill="#11203a" stroke="#35d0e0" stroke-width="1.5"/>
+    <circle cx="38" cy="147" r="5.4" fill="none" stroke="#35d0e0" stroke-width="1.7"/>
+    <line x1="42" y1="151" x2="46" y2="155" stroke="#35d0e0" stroke-width="1.7" stroke-linecap="round"/>
+    <text x="58" y="152" fill="#f2f6ff" font-size="12.5">an</text>
+    <rect x="74" y="140" width="1.6" height="15" fill="#35d0e0"/>
+    <circle cx="284" cy="147" r="9" fill="#16294a"/>
+    <path d="M281 144l6 6M287 144l-6 6" stroke="#a5b3d1" stroke-width="1.5" stroke-linecap="round"/>
+
+    <!-- meta line -->
+    <text x="22" y="188" fill="#a5b3d1" font-size="10.5" font-weight="600">5</text>
+    <text x="32" y="188" fill="#7386ac" font-size="10.5">matches</text>
+    <circle cx="262" cy="185" r="3" fill="#1fd1b4"/>
+    <text x="272" y="188" fill="#1fd1b4" font-size="8.5" font-weight="700" letter-spacing=".8">SEARCHING</text>
+
+    <!-- results, with the matched prefix highlighted -->
+    <g>
+      <rect x="24" y="206" width="34" height="34" rx="12" fill="url(#pa1)"/>
+      <text x="41" y="228" fill="#04121c" font-size="12" font-weight="700" text-anchor="middle">AN</text>
+      <rect x="70" y="212" width="20" height="15" rx="3" fill="rgba(53,208,224,.16)"/>
+      <text x="72" y="224" fill="#35d0e0" font-size="12.5" font-weight="700">an</text>
+      <text x="91" y="224" fill="#f2f6ff" font-size="12.5">ikur Rahman</text>
+      <text x="70" y="238" fill="#7386ac" font-size="10.5" font-family="'JetBrains Mono', monospace">01750885871</text>
+
+      <rect x="24" y="258" width="34" height="34" rx="12" fill="url(#pa3)"/>
+      <text x="41" y="280" fill="#04121c" font-size="12" font-weight="700" text-anchor="middle">AN</text>
+      <rect x="70" y="264" width="20" height="15" rx="3" fill="rgba(53,208,224,.16)"/>
+      <text x="72" y="276" fill="#35d0e0" font-size="12.5" font-weight="700">an</text>
+      <text x="91" y="276" fill="#f2f6ff" font-size="12.5">ik Chowdhury</text>
+      <text x="70" y="290" fill="#7386ac" font-size="10.5" font-family="'JetBrains Mono', monospace">+8801756472523</text>
+
+      <!-- hovered row -->
+      <rect x="12" y="304" width="292" height="50" rx="12" fill="#16294a"/>
+      <rect x="24" y="310" width="34" height="34" rx="12" fill="url(#pa2)"/>
+      <text x="41" y="332" fill="#fff" font-size="12" font-weight="700" text-anchor="middle">SU</text>
+      <text x="70" y="328" fill="#f2f6ff" font-size="12.5">Sush</text>
+      <rect x="99" y="316" width="20" height="15" rx="3" fill="rgba(53,208,224,.16)"/>
+      <text x="101" y="328" fill="#35d0e0" font-size="12.5" font-weight="700">an</text>
+      <text x="120" y="328" fill="#f2f6ff" font-size="12.5">to Das</text>
+      <text x="70" y="342" fill="#7386ac" font-size="10.5" font-family="'JetBrains Mono', monospace">+8801700000001</text>
+      <circle cx="284" cy="329" r="11" fill="rgba(31,209,180,.16)"/>
+      <path d="M279 329h10m-4-4l4 4-4 4" stroke="#1fd1b4" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+      <rect x="24" y="368" width="34" height="34" rx="12" fill="url(#pa4)"/>
+      <text x="41" y="390" fill="#04121c" font-size="12" font-weight="700" text-anchor="middle">NA</text>
+      <text x="70" y="386" fill="#f2f6ff" font-size="12.5">N</text>
+      <rect x="78" y="374" width="20" height="15" rx="3" fill="rgba(53,208,224,.16)"/>
+      <text x="80" y="386" fill="#35d0e0" font-size="12.5" font-weight="700">an</text>
+      <text x="99" y="386" fill="#f2f6ff" font-size="12.5">di Akter</text>
+      <text x="70" y="400" fill="#7386ac" font-size="10.5" font-family="'JetBrains Mono', monospace">+8801793452836</text>
+
+      <rect x="24" y="420" width="34" height="34" rx="12" fill="url(#pa5)"/>
+      <text x="41" y="442" fill="#04121c" font-size="12" font-weight="700" text-anchor="middle">AM</text>
+      <rect x="70" y="426" width="20" height="15" rx="3" fill="rgba(53,208,224,.16)"/>
+      <text x="72" y="438" fill="#35d0e0" font-size="12.5" font-weight="700">an</text>
+      <text x="91" y="438" fill="#f2f6ff" font-size="12.5">ika Sen</text>
+      <text x="70" y="452" fill="#7386ac" font-size="10.5" font-family="'JetBrains Mono', monospace">+8801774225956</text>
+    </g>
+
+    <!-- skeleton rows loading below (infinite scroll) -->
+    <g opacity=".65">
+      <rect x="24" y="474" width="34" height="34" rx="12" fill="#11203a"/>
+      <rect x="70" y="482" width="120" height="9" rx="4.5" fill="#11203a"/>
+      <rect x="70" y="497" width="76" height="8" rx="4" fill="#11203a"/>
+      <rect x="24" y="522" width="34" height="34" rx="12" fill="#11203a"/>
+      <rect x="70" y="530" width="96" height="9" rx="4.5" fill="#11203a"/>
+      <rect x="70" y="545" width="62" height="8" rx="4" fill="#11203a"/>
+    </g>
+    <text x="158" y="580" fill="#7386ac" font-size="9.5" text-anchor="middle" letter-spacing=".6">loading the next 20…</text>
+
+    <!-- =========================== EMPTY THREAD =========================== -->
+    <g transform="translate(608 268)">
+      <rect x="-39" y="-72" width="78" height="78" rx="26" fill="rgba(53,208,224,.1)" stroke="#22385c"/>
+      <path d="M-16-42h32a8 8 0 018 8v16a8 8 0 01-8 8h-20l-12 10v-10a8 8 0 01-8-8v-16a8 8 0 018-8z" fill="none" stroke="#35d0e0" stroke-width="2.6" stroke-linejoin="round"/>
+      <text x="0" y="42" fill="#f2f6ff" font-size="17" font-weight="600" text-anchor="middle">Pick someone to talk to</text>
+      <text x="0" y="70" fill="#7386ac" font-size="12.5" text-anchor="middle">Search the directory on the left, then tap a</text>
+      <text x="0" y="90" fill="#7386ac" font-size="12.5" text-anchor="middle">name to open the conversation.</text>
+    </g>
+  </g>
+
+  <rect width="900" height="600" rx="18" fill="none" stroke="rgba(150,172,224,.26)" stroke-width="1.5"/>
+</svg>

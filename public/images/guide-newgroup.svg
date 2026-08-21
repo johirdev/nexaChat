@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="900" height="600" role="img" aria-label="The New group dialog in NexaChat, with a name typed and three members selected">
+  <defs>
+    <linearGradient id="ng1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1fd1b4"/><stop offset="1" stop-color="#35d0e0"/></linearGradient>
+    <linearGradient id="ng2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4a8cf7"/><stop offset="1" stop-color="#8b4dff"/></linearGradient>
+    <linearGradient id="ng3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f5a524"/><stop offset="1" stop-color="#f76b1c"/></linearGradient>
+    <linearGradient id="ng4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#37d67a"/><stop offset="1" stop-color="#0aa06e"/></linearGradient>
+    <linearGradient id="ngBtn" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6d3df0"/><stop offset="1" stop-color="#8b4dff"/></linearGradient>
+    <clipPath id="ngFrame"><rect width="900" height="600" rx="18"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#ngFrame)" font-family="Inter, 'Segoe UI', system-ui, sans-serif">
+    <!-- ============ dimmed app behind ============ -->
+    <rect width="900" height="600" fill="#0a1728"/>
+    <rect width="300" height="600" fill="#0b1526"/>
+    <line x1="300" y1="0" x2="300" y2="600" stroke="#1a2c4a"/>
+    <g opacity=".55">
+      <rect x="20" y="18" width="32" height="32" rx="10" fill="rgba(31,209,180,.12)"/>
+      <circle cx="36" cy="34" r="7.4" fill="none" stroke="#1fd1b4" stroke-width="2.2"/>
+      <text x="62" y="32" fill="#f2f6ff" font-size="14" font-weight="700">Nexa<tspan fill="#35d0e0">Chat</tspan></text>
+      <text x="62" y="46" fill="#7386ac" font-size="8.5" font-weight="600" letter-spacing="1.4">CONVERSATIONS</text>
+      <line x1="0" y1="70" x2="300" y2="70" stroke="#1a2c4a"/>
+      <text x="32" y="98" fill="#35d0e0" font-size="11.5" font-weight="600">Chats</text>
+      <rect x="28" y="107" width="40" height="2" rx="1" fill="#35d0e0"/>
+      <text x="112" y="98" fill="#7386ac" font-size="11.5" font-weight="600">People</text>
+
+      <!-- the New group button that opened this -->
+      <rect x="16" y="126" width="268" height="40" rx="12" fill="rgba(31,209,180,.1)" stroke="#1fd1b4" stroke-dasharray="5 4"/>
+      <path d="M126 146h12m-6-6v12" stroke="#1fd1b4" stroke-width="2" stroke-linecap="round"/>
+      <text x="150" y="150" fill="#1fd1b4" font-size="12" font-weight="600">New group</text>
+
+      <g>
+        <rect x="22" y="188" width="34" height="34" rx="12" fill="url(#ng1)"/>
+        <rect x="66" y="196" width="120" height="9" rx="4.5" fill="#16294a"/>
+        <rect x="66" y="211" width="168" height="8" rx="4" fill="#11203a"/>
+        <rect x="22" y="240" width="34" height="34" rx="12" fill="url(#ng2)"/>
+        <rect x="66" y="248" width="96" height="9" rx="4.5" fill="#16294a"/>
+        <rect x="66" y="263" width="146" height="8" rx="4" fill="#11203a"/>
+        <rect x="22" y="292" width="34" height="34" rx="12" fill="url(#ng3)"/>
+        <rect x="66" y="300" width="128" height="9" rx="4.5" fill="#16294a"/>
+        <rect x="66" y="315" width="110" height="8" rx="4" fill="#11203a"/>
+      </g>
+    </g>
+
+    <!-- scrim -->
+    <rect width="900" height="600" fill="#03060f" opacity=".72"/>
+
+    <!-- ================= MODAL ================= -->
+    <rect x="218" y="42" width="464" height="516" rx="20" fill="#0d1c30" stroke="#3b4a78"/>
+
+    <!-- head -->
+    <text x="246" y="80" fill="#f2f6ff" font-size="16" font-weight="600">New group</text>
+    <circle cx="650" cy="74" r="15" fill="#131d3d"/>
+    <path d="M645 69l10 10M655 69l-10 10" stroke="#a5b3d1" stroke-width="1.7" stroke-linecap="round"/>
+    <line x1="218" y1="102" x2="682" y2="102" stroke="#22385c"/>
+
+    <!-- group name -->
+    <text x="246" y="130" fill="#7386ac" font-size="9.5" font-weight="700" letter-spacing="1.5">GROUP NAME</text>
+    <rect x="243" y="139" width="414" height="46" rx="13" fill="rgba(53,208,224,.11)"/>
+    <rect x="246" y="142" width="408" height="40" rx="11" fill="rgba(0,0,0,.32)" stroke="#35d0e0" stroke-width="1.5"/>
+    <text x="266" y="167" fill="#f2f6ff" font-size="13">Design circle</text>
+    <rect x="345" y="154" width="1.6" height="16" fill="#35d0e0"/>
+
+    <!-- members label + search -->
+    <text x="246" y="212" fill="#7386ac" font-size="9.5" font-weight="700" letter-spacing="1.5">MEMBERS · 3 SELECTED</text>
+    <rect x="246" y="222" width="408" height="38" rx="11" fill="#11203a" stroke="#22385c"/>
+    <circle cx="268" cy="241" r="5" fill="none" stroke="#7386ac" stroke-width="1.6"/>
+    <line x1="271.6" y1="244.6" x2="275" y2="248" stroke="#7386ac" stroke-width="1.6" stroke-linecap="round"/>
+    <text x="288" y="246" fill="#7386ac" font-size="12">Search by name or phone</text>
+
+    <!-- selected chips -->
+    <g>
+      <rect x="246" y="272" width="106" height="26" rx="13" fill="rgba(31,209,180,.14)"/>
+      <text x="260" y="289" fill="#1fd1b4" font-size="11" font-weight="600">Amelia</text>
+      <circle cx="338" cy="285" r="8" fill="rgba(31,209,180,.24)"/>
+      <path d="M335 282l6 6M341 282l-6 6" stroke="#1fd1b4" stroke-width="1.4" stroke-linecap="round"/>
+
+      <rect x="360" y="272" width="94" height="26" rx="13" fill="rgba(31,209,180,.14)"/>
+      <text x="374" y="289" fill="#1fd1b4" font-size="11" font-weight="600">Rasel</text>
+      <circle cx="440" cy="285" r="8" fill="rgba(31,209,180,.24)"/>
+      <path d="M437 282l6 6M443 282l-6 6" stroke="#1fd1b4" stroke-width="1.4" stroke-linecap="round"/>
+
+      <rect x="462" y="272" width="94" height="26" rx="13" fill="rgba(31,209,180,.14)"/>
+      <text x="476" y="289" fill="#1fd1b4" font-size="11" font-weight="600">Maria</text>
+      <circle cx="542" cy="285" r="8" fill="rgba(31,209,180,.24)"/>
+      <path d="M539 282l6 6M545 282l-6 6" stroke="#1fd1b4" stroke-width="1.4" stroke-linecap="round"/>
+    </g>
+
+    <!-- picker list -->
+    <rect x="246" y="312" width="408" height="164" rx="14" fill="rgba(0,0,0,.2)" stroke="#22385c"/>
+
+    <g>
+      <rect x="252" y="318" width="396" height="42" rx="10" fill="rgba(31,209,180,.12)"/>
+      <rect x="262" y="326" width="26" height="26" rx="9" fill="url(#ng1)"/>
+      <text x="275" y="343" fill="#04121c" font-size="10" font-weight="700" text-anchor="middle">AC</text>
+      <text x="298" y="338" fill="#f2f6ff" font-size="12">Amelia Chen</text>
+      <text x="298" y="351" fill="#7386ac" font-size="10" font-family="'JetBrains Mono', monospace">+8801700000001</text>
+      <rect x="616" y="330" width="19" height="19" rx="6" fill="#1fd1b4"/>
+      <path d="M620 339.5l3 3 5.5-5.5" stroke="#04121c" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+      <rect x="252" y="366" width="396" height="42" rx="10" fill="rgba(31,209,180,.12)"/>
+      <rect x="262" y="374" width="26" height="26" rx="9" fill="url(#ng3)"/>
+      <text x="275" y="391" fill="#04121c" font-size="10" font-weight="700" text-anchor="middle">RA</text>
+      <text x="298" y="386" fill="#f2f6ff" font-size="12">Rasel Ahmed</text>
+      <text x="298" y="399" fill="#7386ac" font-size="10" font-family="'JetBrains Mono', monospace">+8801824842336</text>
+      <rect x="616" y="378" width="19" height="19" rx="6" fill="#1fd1b4"/>
+      <path d="M620 387.5l3 3 5.5-5.5" stroke="#04121c" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+      <rect x="262" y="422" width="26" height="26" rx="9" fill="url(#ng4)"/>
+      <text x="275" y="439" fill="#04121c" font-size="10" font-weight="700" text-anchor="middle">NI</text>
+      <text x="298" y="434" fill="#f2f6ff" font-size="12">Nazmul Islam</text>
+      <text x="298" y="447" fill="#7386ac" font-size="10" font-family="'JetBrains Mono', monospace">+8801793452836</text>
+      <rect x="616" y="426" width="19" height="19" rx="6" fill="none" stroke="#3b4a78" stroke-width="1.6"/>
+    </g>
+
+    <!-- foot -->
+    <line x1="218" y1="500" x2="682" y2="500" stroke="#22385c"/>
+    <rect x="246" y="516" width="196" height="42" rx="11" fill="rgba(255,255,255,.04)" stroke="#3b4a78"/>
+    <text x="344" y="542" fill="#f2f6ff" font-size="13" font-weight="600" text-anchor="middle">Cancel</text>
+    <rect x="458" y="516" width="196" height="42" rx="11" fill="url(#ngBtn)"/>
+    <text x="556" y="542" fill="#fff" font-size="13" font-weight="600" text-anchor="middle">Create group · 4</text>
+  </g>
+
+  <rect width="900" height="600" rx="18" fill="none" stroke="rgba(150,172,224,.26)" stroke-width="1.5"/>
+</svg>

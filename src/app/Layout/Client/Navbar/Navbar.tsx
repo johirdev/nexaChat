@@ -1,67 +1,121 @@
 "use client";
 
-import { AuthContext } from "@/src/app/AuthProvider";
-import { Menu, X } from "lucide-react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useContext, useState } from "react";
+import { usePathname } from "next/navigation";
+import { ArrowRight, Menu, X } from "lucide-react";
+import { AuthContext } from "@/src/app/AuthProvider";
+import "@/src/app/components/HomeLandingPage/landing.css";
 
-const Navbar = () => {
-  const [open, setOpen] = useState(false);
-  const { user, token, logOut } = useContext(AuthContext);
-  console.log(user, token, "sdfsdfkj");
+/**
+ * Section links are written absolute (`/#features`) so they still work from
+ * /guide or /login, where the target section is on another route.
+ */
+const LINKS = [
+  { href: "/#features", label: "Features" },
+  { href: "/#how", label: "How it works" },
+  { href: "/guide", label: "Guide" },
+  { href: "/#groups", label: "Groups" },
+  { href: "/#faq", label: "FAQ" },
+];
+
+/** Distance scrolled before the bar earns its border. */
+const STUCK_AFTER = 12;
+
+export default function Navbar() {
+  const { token } = useContext(AuthContext);
+  const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
+  const [isStuck, setIsStuck] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setIsStuck(window.scrollY > STUCK_AFTER);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsOpen(false);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [isOpen]);
+
+  const close = useCallback(() => setIsOpen(false), []);
+
+  const isSignedIn = Boolean(token);
+  const ctaHref = isSignedIn ? "/dashboard" : "/login";
+  const ctaLabel = isSignedIn ? "Open your space" : "Start chatting free";
+
   return (
-    <header className="site-nav">
-      <div className="max-width site-nav-inner">
-        <Link href="/" className="site-brand" aria-label="NexaChat home">
-          <Image width={60} height={60} src="/nexaChat.png" alt="NexaChat" />{" "}
+    <header className={`ln-nav${isStuck ? " is-stuck" : ""}`}>
+      <div className="ln-wrap ln-nav-inner">
+        <Link href="/" className="ln-brand" aria-label="NexaChat home">
+          <Image src="/nexaChat.png" alt="" width={40} height={40} priority />
           <span>
-            Nexa<span>Chat</span>
+            Nexa<em>Chat</em>
           </span>
         </Link>
-        <nav className={open ? "site-nav-links is-open" : "site-nav-links"}>
-          <Link href="#features" onClick={() => setOpen(false)}>
-            Features
-          </Link>
-          <Link href="#why" onClick={() => setOpen(false)}>
-            Why NexaChat
-          </Link>
-          <Link href="#preview" onClick={() => setOpen(false)}>
-            Preview
-          </Link>
-          {token ? (
-            <>
+
+        <nav className="ln-nav-links" aria-label="Primary">
+          {LINKS.map((link) => {
+            const isCurrent = link.href === pathname;
+            return (
               <Link
-                className="site-nav-cta"
-                href="/dashboard"
-                onClick={() => setOpen(false)}
+                key={link.href}
+                href={link.href}
+                className={isCurrent ? "is-current" : undefined}
+                aria-current={isCurrent ? "page" : undefined}
               >
-                Start chatting <span>↗</span>
+                {link.label}
               </Link>
-            </>
-          ) : (
-            <>
-              <Link
-                className="site-nav-cta"
-                href="/login"
-                onClick={() => setOpen(false)}
-              >
-                Login
-              </Link>
-            </>
-          )}
+            );
+          })}
         </nav>
-        <button
-          className="site-menu"
-          type="button"
-          aria-label="Toggle menu"
-          onClick={() => setOpen(!open)}
-        >
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
+
+        <div className="ln-nav-right">
+          {!isSignedIn && (
+            <Link href="/login" className="ln-nav-signin">
+              Sign in
+            </Link>
+          )}
+
+          <Link href={ctaHref} className="ln-btn ln-btn-primary ln-nav-cta">
+            {ctaLabel} <ArrowRight size={15} />
+          </Link>
+
+          <button
+            type="button"
+            className="ln-burger"
+            onClick={() => setIsOpen((open) => !open)}
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isOpen}
+            aria-controls="ln-mobile-menu"
+          >
+            {isOpen ? <X size={19} /> : <Menu size={19} />}
+          </button>
+        </div>
+      </div>
+
+      <div id="ln-mobile-menu" className={`ln-drawer${isOpen ? " is-open" : ""}`}>
+        {LINKS.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            onClick={close}
+            aria-current={link.href === pathname ? "page" : undefined}
+          >
+            {link.label}
+          </Link>
+        ))}
+        <Link href={ctaHref} className="ln-btn ln-btn-primary" onClick={close}>
+          {ctaLabel} <ArrowRight size={15} />
+        </Link>
       </div>
     </header>
   );
-};
-
-export default Navbar;
+}

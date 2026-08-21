@@ -1,0 +1,208 @@
+/* my-profile.css */
+
+.pf-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(3, 9, 20, 0.78);
+  backdrop-filter: blur(12px);
+}
+
+.pf-card {
+  width: 100%;
+  max-width: 420px;
+  background: #111a2e;
+  border: 1px solid #1f2a44;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+.pf-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid #1f2a44;
+}
+
+.pf-head h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: #f3f4f6;
+}
+
+.pf-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #8b95a8;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.pf-close:hover {
+  background: #1a2540;
+  color: #e5e7eb;
+}
+
+.pf-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pf-avatar-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.pf-avatar-row .ul-avatar {
+  width: 72px;
+  height: 72px;
+  font-size: 24px;
+}
+
+.pf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pf-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #6b7688;
+}
+
+.pf-value {
+  font-size: 15px;
+  color: #e5e7eb;
+}
+
+.pf-muted {
+  color: #8b95a8;
+  font-style: italic;
+}
+
+.pf-input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #e5e7eb;
+  background: #0d1526;
+  border: 1px solid #29365a;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.pf-input:focus {
+  border-color: #2dd4bf;
+}
+
+.pf-textarea {
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.pf-foot {
+  display: flex;
+  gap: 10px;
+  padding: 20px 24px;
+  border-top: 1px solid #1f2a44;
+}
+
+.pf-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s ease, opacity 0.15s ease;
+}
+
+.pf-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.pf-btn-outline {
+  border: 1px solid #29365a;
+  background: transparent;
+  color: #cbd5e1;
+}
+
+.pf-btn-outline:hover {
+  background: #1a2540;
+}
+
+.pf-btn-primary {
+  border: none;
+  background: #14b8a6;
+  color: #06281f;
+}
+
+.pf-btn-primary:hover:not(:disabled) {
+  background: #0d9488;
+}
+
+.pf-btn-wide {
+  flex: none;
+  width: 100%;
+}
+
+.pf-close:focus-visible,
+.pf-btn:focus-visible,
+.pf-input:focus-visible {
+  outline: 2px solid #35d0e0;
+  outline-offset: 2px;
+}
+
+@media (max-width: 520px) {
+  .pf-overlay {
+    align-items: flex-end;
+    padding: 12px;
+  }
+
+  .pf-card {
+    max-width: none;
+    border-radius: 16px 16px 12px 12px;
+  }
+
+  .pf-head,
+  .pf-body,
+  .pf-foot {
+    padding-inline: 18px;
+  }
+
+  .pf-body {
+    gap: 16px;
+    padding-block: 18px;
+  }
+
+  .pf-foot {
+    padding-block: 16px;
+  }
+}

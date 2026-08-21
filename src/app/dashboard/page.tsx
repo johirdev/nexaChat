@@ -1,9 +1,10 @@
-'use client';
+import type { Metadata } from "next";
+import ChatWorkspace from "../components/Chat/ChatWorkspace";
 
-export default function Home() {
-  return (
-    <div>
-    Hello Admin dashboard
-    </div>
-  );
+export const metadata: Metadata = {
+  title: "Chats",
+};
+
+export default function DashboardPage() {
+  return <ChatWorkspace />;
 }

@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="900" height="600" role="img" aria-label="Sending a message in NexaChat: one message still sending, one delivered">
+  <defs>
+    <linearGradient id="sd1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1fd1b4"/><stop offset="1" stop-color="#35d0e0"/></linearGradient>
+    <linearGradient id="sd2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4a8cf7"/><stop offset="1" stop-color="#8b4dff"/></linearGradient>
+    <linearGradient id="sdOwn" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1fd1b4"/><stop offset="1" stop-color="#12b5a0"/></linearGradient>
+    <linearGradient id="sdGlow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8b4dff" stop-opacity=".15"/><stop offset="1" stop-color="#1fd1b4" stop-opacity=".05"/>
+    </linearGradient>
+    <clipPath id="sdFrame"><rect width="900" height="600" rx="18"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#sdFrame)" font-family="Inter, 'Segoe UI', system-ui, sans-serif">
+    <rect width="900" height="600" fill="#0a1728"/>
+    <rect width="900" height="600" fill="url(#sdGlow)"/>
+
+    <!-- header -->
+    <rect width="900" height="66" fill="rgba(11,21,38,.85)"/>
+    <line x1="0" y1="66" x2="900" y2="66" stroke="#1a2c4a"/>
+    <rect x="26" y="15" width="36" height="36" rx="13" fill="url(#sd1)"/>
+    <text x="44" y="38" fill="#04121c" font-size="13" font-weight="700" text-anchor="middle">AC</text>
+    <text x="76" y="29" fill="#f2f6ff" font-size="14" font-weight="600">Amelia Chen</text>
+    <text x="76" y="46" fill="#7386ac" font-size="11">+880 1700 000 001</text>
+    <rect x="742" y="22" width="62" height="22" rx="11" fill="rgba(31,209,180,.14)"/>
+    <circle cx="756" cy="33" r="3.2" fill="#1fd1b4"/>
+    <text x="765" y="37" fill="#1fd1b4" font-size="9" font-weight="700" letter-spacing=".8">LIVE</text>
+    <circle cx="846" cy="33" r="16" fill="#11203a"/>
+    <text x="846" y="38" fill="#a5b3d1" font-size="13" font-weight="700" text-anchor="middle">i</text>
+
+    <!-- day divider -->
+    <line x1="290" y1="106" x2="410" y2="106" stroke="#1a2c4a"/>
+    <text x="450" y="110" fill="#7386ac" font-size="9.5" font-weight="700" letter-spacing="1.5" text-anchor="middle">TODAY</text>
+    <line x1="490" y1="106" x2="610" y2="106" stroke="#1a2c4a"/>
+
+    <!-- them -->
+    <rect x="60" y="140" width="30" height="30" rx="10" fill="url(#sd1)"/>
+    <text x="75" y="159" fill="#04121c" font-size="11" font-weight="700" text-anchor="middle">A</text>
+    <rect x="100" y="136" width="322" height="38" rx="16" fill="#1a2748"/>
+    <rect x="100" y="158" width="16" height="16" fill="#1a2748"/>
+    <text x="120" y="160" fill="#f2f6ff" font-size="13">Are we still on for the review at four?</text>
+    <text x="106" y="192" fill="#7386ac" font-size="10">3:58 PM</text>
+
+    <!-- own — delivered -->
+    <rect x="512" y="222" width="298" height="38" rx="16" fill="url(#sdOwn)"/>
+    <rect x="794" y="244" width="16" height="16" fill="#12b5a0"/>
+    <text x="532" y="246" fill="#04121c" font-size="13" font-weight="500">Yes — sending the notes now.</text>
+    <rect x="820" y="226" width="30" height="30" rx="10" fill="url(#sd2)"/>
+    <text x="835" y="245" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">Y</text>
+    <text x="782" y="278" fill="#7386ac" font-size="10" text-anchor="end">3:59 PM</text>
+    <path d="M790 274.5l3 3 5.5-5.5" stroke="#1fd1b4" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="806" y="278" fill="#1fd1b4" font-size="9" font-weight="600">Sent</text>
+
+    <!-- own — still sending (optimistic) -->
+    <g opacity=".62">
+      <rect x="556" y="306" width="254" height="38" rx="16" fill="url(#sdOwn)"/>
+      <rect x="794" y="328" width="16" height="16" fill="#12b5a0"/>
+      <text x="576" y="330" fill="#04121c" font-size="13" font-weight="500">Just uploaded them 📄</text>
+      <rect x="820" y="310" width="30" height="30" rx="10" fill="url(#sd2)"/>
+      <text x="835" y="329" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">Y</text>
+    </g>
+    <text x="778" y="362" fill="#7386ac" font-size="10" text-anchor="end">now</text>
+    <g transform="translate(790 358)">
+      <circle r="6" fill="none" stroke="#7386ac" stroke-width="1.8" stroke-dasharray="28" stroke-dashoffset="10" stroke-linecap="round"/>
+    </g>
+    <text x="806" y="362" fill="#7386ac" font-size="9" font-weight="600">Sending</text>
+
+    <!-- callout: the optimistic row -->
+    <g>
+      <path d="M300 330h224" stroke="#8b4dff" stroke-width="1.6" stroke-dasharray="5 5"/>
+      <circle cx="528" cy="330" r="4" fill="#8b4dff"/>
+      <rect x="42" y="304" width="256" height="52" rx="13" fill="#131d3d" stroke="#8b4dff"/>
+      <text x="60" y="326" fill="#8b4dff" font-size="10" font-weight="700" letter-spacing=".8">OPTIMISTIC</text>
+      <text x="60" y="344" fill="#a5b3d1" font-size="11.5">On screen before the server replies</text>
+    </g>
+
+    <!-- typing indicator -->
+    <rect x="60" y="394" width="30" height="30" rx="10" fill="url(#sd1)"/>
+    <text x="75" y="413" fill="#04121c" font-size="11" font-weight="700" text-anchor="middle">A</text>
+    <rect x="100" y="392" width="76" height="34" rx="16" fill="#1a2748"/>
+    <circle cx="124" cy="409" r="3.4" fill="#a5b3d1" opacity=".4"/>
+    <circle cx="138" cy="409" r="3.4" fill="#a5b3d1" opacity=".7"/>
+    <circle cx="152" cy="409" r="3.4" fill="#a5b3d1"/>
+
+    <!-- composer, focused with typed text -->
+    <line x1="0" y1="482" x2="900" y2="482" stroke="#1a2c4a"/>
+    <rect x="57" y="509" width="734" height="56" rx="22" fill="rgba(53,208,224,.11)"/>
+    <rect x="60" y="512" width="728" height="50" rx="20" fill="#11203a" stroke="#35d0e0" stroke-width="1.5"/>
+    <text x="84" y="543" fill="#f2f6ff" font-size="13">See you at four then</text>
+    <rect x="222" y="529" width="1.6" height="16" fill="#35d0e0"/>
+    <circle cx="756" cy="537" r="19" fill="url(#sdOwn)"/>
+    <path d="M748 537l16-6-6 6 6 6z" fill="#04121c"/>
+
+    <rect x="812" y="521" width="60" height="32" rx="9" fill="#131d3d" stroke="#22385c"/>
+    <text x="842" y="541" fill="#a5b3d1" font-size="11" font-weight="600" text-anchor="middle">Enter</text>
+  </g>
+
+  <rect width="900" height="600" rx="18" fill="none" stroke="rgba(150,172,224,.26)" stroke-width="1.5"/>
+</svg>

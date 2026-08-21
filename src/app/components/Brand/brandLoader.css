@@ -1,0 +1,198 @@
+/* ==========================================================================
+   BRAND LOADER
+   The screen a person sees while their session is being resolved, and while a
+   redirect is on its way. Colours come from the logo's own sweep.
+   ========================================================================== */
+
+.bl {
+  --bl-bg: #070c1a;
+  --bl-ink: #f2f6ff;
+  --bl-body: #a5b3d1;
+  --bl-faint: #7386ac;
+  --bl-teal: #1fd1b4;
+  --bl-cyan: #35d0e0;
+  --bl-blue: #4a8cf7;
+  --bl-violet: #8b4dff;
+  --bl-line: rgba(150, 172, 224, 0.13);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+  min-height: 100dvh;
+  padding: 32px 24px;
+  overflow: hidden;
+  background:
+    radial-gradient(680px 420px at 50% 18%, rgba(139, 77, 255, 0.18), transparent 66%),
+    radial-gradient(560px 360px at 50% 92%, rgba(31, 209, 180, 0.11), transparent 64%),
+    var(--bl-bg);
+  color: var(--bl-ink);
+  font-family: var(--font-inter), var(--font-dm-sans), "Segoe UI", system-ui,
+    sans-serif;
+  text-align: center;
+}
+
+/* Covers whatever is already on screen while a redirect resolves. */
+.bl.is-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  min-height: 0;
+  animation: bl-in 0.24s ease both;
+}
+
+@keyframes bl-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ------------------------------------------------------------- mark ----- */
+.bl-mark {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 128px;
+  height: 128px;
+}
+
+.bl-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
+.bl-ring.is-outer {
+  inset: 0;
+  border-top-color: var(--bl-teal);
+  border-right-color: var(--bl-cyan);
+  animation: bl-spin 1.5s linear infinite;
+}
+.bl-ring.is-inner {
+  inset: 15px;
+  border-bottom-color: var(--bl-violet);
+  border-left-color: var(--bl-blue);
+  animation: bl-spin 2.1s linear infinite reverse;
+}
+.bl-ring.is-halo {
+  inset: 26px;
+  border: 0;
+  background: radial-gradient(
+    circle,
+    rgba(53, 208, 224, 0.22),
+    transparent 70%
+  );
+  animation: bl-halo 2.4s ease-in-out infinite;
+}
+
+@keyframes bl-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes bl-halo {
+  0%, 100% { opacity: 0.45; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.06); }
+}
+
+.bl-logo {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 16px rgba(53, 208, 224, 0.45));
+  animation: bl-breathe 2.4s ease-in-out infinite;
+}
+
+@keyframes bl-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+/* ------------------------------------------------------------- copy ----- */
+.bl-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  max-width: 34ch;
+}
+
+.bl-word {
+  font-size: 1.42rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--bl-ink);
+}
+.bl-word em {
+  font-style: normal;
+  background: linear-gradient(
+    100deg,
+    var(--bl-teal),
+    var(--bl-cyan) 30%,
+    var(--bl-blue) 62%,
+    var(--bl-violet)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.bl-msg {
+  margin: 0;
+  color: var(--bl-body);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.bl-note {
+  margin: 0;
+  color: var(--bl-faint);
+  font-size: 0.76rem;
+  line-height: 1.6;
+}
+
+/* -------------------------------------------------------------- bar ----- */
+.bl-bar {
+  position: relative;
+  width: 190px;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(150, 172, 224, 0.14);
+  overflow: hidden;
+}
+.bl-bar::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  width: 42%;
+  border-radius: 999px;
+  background: linear-gradient(
+    100deg,
+    var(--bl-teal),
+    var(--bl-cyan) 40%,
+    var(--bl-violet)
+  );
+  animation: bl-slide 1.35s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes bl-slide {
+  0% { transform: translateX(-110%); }
+  100% { transform: translateX(340%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bl-ring.is-outer,
+  .bl-ring.is-inner,
+  .bl-ring.is-halo,
+  .bl-logo,
+  .bl.is-overlay {
+    animation: none;
+  }
+  .bl-ring.is-outer {
+    border-color: var(--bl-line);
+    border-top-color: var(--bl-teal);
+  }
+  .bl-bar::after {
+    animation: none;
+    width: 100%;
+    opacity: 0.55;
+  }
+}

@@ -1,10 +1,10 @@
 "use client";
 
 import { memo } from "react";
-import { MessageCircle } from "lucide-react";
 import type { User } from "@/src/types/user";
 import HighlightedText from "./HighlightedText";
 import UserAvatar from "./UserAvatar";
+import Image from "next/image";
 
 interface UserRowProps {
   user: User;
@@ -40,8 +40,14 @@ function UserRow({ user, query, isActive, index = 0, onSelect }: UserRowProps) {
             <HighlightedText text={user.phone} query={query} />
           </span>
         </span>
-
-        <MessageCircle className="ul-row-action" size={16} aria-hidden="true" />
+        <Image
+          className="ul-brand-mark ul-row-action"
+          src="/nexaChat.png"
+          alt=""
+          width={14}
+          height={14}
+          priority
+        />
         <span className="ul-sr">Start a chat with {user.name}</span>
       </button>
     </li>

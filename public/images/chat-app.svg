@@ -1,0 +1,183 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750" role="img" aria-label="NexaChat conversation list beside an open chat thread">
+  <defs>
+    <linearGradient id="a1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2de0c4"/><stop offset="1" stop-color="#1d9bf0"/>
+    </linearGradient>
+    <linearGradient id="a2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7750f5"/><stop offset="1" stop-color="#c86dd7"/>
+    </linearGradient>
+    <linearGradient id="a3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f5a524"/><stop offset="1" stop-color="#f76b1c"/>
+    </linearGradient>
+    <linearGradient id="a4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#37d67a"/><stop offset="1" stop-color="#0aa06e"/>
+    </linearGradient>
+    <linearGradient id="a5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff7c9b"/><stop offset="1" stop-color="#e0396c"/>
+    </linearGradient>
+    <linearGradient id="own" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2de0c4"/><stop offset="1" stop-color="#12b5a0"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7750f5" stop-opacity=".16"/>
+      <stop offset="1" stop-color="#2de0c4" stop-opacity=".05"/>
+    </linearGradient>
+    <clipPath id="frame"><rect width="1200" height="750" rx="18"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#frame)" font-family="Inter, 'Segoe UI', system-ui, sans-serif">
+    <rect width="1200" height="750" fill="#0a1728"/>
+    <rect x="320" width="880" height="750" fill="url(#glow)"/>
+
+    <!-- ============================ RAIL ============================ -->
+    <rect width="320" height="750" fill="#0b1526"/>
+    <line x1="320" y1="0" x2="320" y2="750" stroke="#1a2c4a" stroke-width="1"/>
+
+    <!-- brand -->
+    <rect x="20" y="20" width="34" height="34" rx="10" fill="#2de0c4" opacity=".12"/>
+    <circle cx="37" cy="37" r="8" fill="none" stroke="#2de0c4" stroke-width="2.4"/>
+    <circle cx="37" cy="37" r="2.6" fill="#2de0c4"/>
+    <text x="66" y="35" fill="#f2f9ff" font-size="15" font-weight="700" letter-spacing="-.3">Nexa<tspan fill="#2de0c4">Chat</tspan></text>
+    <text x="66" y="50" fill="#63809e" font-size="9" font-weight="600" letter-spacing="1.4">CONVERSATIONS</text>
+    <line x1="0" y1="74" x2="320" y2="74" stroke="#1a2c4a"/>
+
+    <!-- tabs -->
+    <text x="34" y="103" fill="#2de0c4" font-size="12" font-weight="600">Chats</text>
+    <rect x="30" y="112" width="42" height="2" rx="1" fill="#2de0c4"/>
+    <text x="118" y="103" fill="#63809e" font-size="12" font-weight="600">People</text>
+    <rect x="26" y="98" width="26" height="14" rx="7" fill="#2de0c4" opacity=".14"/>
+    <text x="86" y="103" fill="#2de0c4" font-size="9" font-weight="700">6</text>
+
+    <!-- search -->
+    <rect x="16" y="128" width="288" height="38" rx="11" fill="#11203a" stroke="#22385c"/>
+    <circle cx="38" cy="147" r="5.4" fill="none" stroke="#63809e" stroke-width="1.7"/>
+    <line x1="42" y1="151" x2="46" y2="155" stroke="#63809e" stroke-width="1.7" stroke-linecap="round"/>
+    <text x="58" y="152" fill="#63809e" font-size="12">Search conversations</text>
+
+    <!-- rows -->
+    <g>
+      <!-- active -->
+      <rect x="10" y="180" width="300" height="62" rx="12" fill="#2de0c4" opacity=".10"/>
+      <rect x="10" y="196" width="3" height="30" rx="1.5" fill="#2de0c4"/>
+      <rect x="24" y="192" width="38" height="38" rx="13" fill="url(#a1)"/>
+      <text x="43" y="216" fill="#04121c" font-size="13" font-weight="700" text-anchor="middle">AC</text>
+      <text x="74" y="205" fill="#f2f9ff" font-size="13" font-weight="600">Amelia Chen</text>
+      <text x="74" y="223" fill="#93aec9" font-size="11">That new direction feels so right ✦</text>
+      <text x="296" y="205" fill="#63809e" font-size="10" text-anchor="end">9:41</text>
+
+      <rect x="24" y="258" width="38" height="38" rx="13" fill="url(#a2)"/>
+      <text x="43" y="282" fill="#fff" font-size="13" font-weight="700" text-anchor="middle">DC</text>
+      <rect x="52" y="286" width="16" height="16" rx="5" fill="#7750f5" stroke="#0b1526" stroke-width="2.4"/>
+      <circle cx="57" cy="294" r="1.6" fill="#fff"/><circle cx="62" cy="294" r="1.6" fill="#fff"/>
+      <text x="74" y="271" fill="#f2f9ff" font-size="13" font-weight="600">Design circle</text>
+      <text x="74" y="289" fill="#63809e" font-size="11">Rasel: shipping the new rail today</text>
+      <text x="296" y="271" fill="#63809e" font-size="10" text-anchor="end">12m</text>
+
+      <rect x="24" y="324" width="38" height="38" rx="13" fill="url(#a3)"/>
+      <text x="43" y="348" fill="#04121c" font-size="13" font-weight="700" text-anchor="middle">MI</text>
+      <text x="74" y="337" fill="#f2f9ff" font-size="13" font-weight="600">Maria Islam</text>
+      <text x="74" y="355" fill="#63809e" font-size="11">You: sounds perfect, see you then</text>
+      <text x="296" y="337" fill="#63809e" font-size="10" text-anchor="end">1h</text>
+
+      <rect x="24" y="390" width="38" height="38" rx="13" fill="url(#a4)"/>
+      <text x="43" y="414" fill="#04121c" font-size="13" font-weight="700" text-anchor="middle">QA</text>
+      <rect x="52" y="418" width="16" height="16" rx="5" fill="#7750f5" stroke="#0b1526" stroke-width="2.4"/>
+      <circle cx="57" cy="426" r="1.6" fill="#fff"/><circle cx="62" cy="426" r="1.6" fill="#fff"/>
+      <text x="74" y="403" fill="#f2f9ff" font-size="13" font-weight="600">Launch squad</text>
+      <text x="74" y="421" fill="#63809e" font-size="11">Nazmul: everything is green ✅</text>
+      <text x="296" y="403" fill="#63809e" font-size="10" text-anchor="end">3h</text>
+
+      <rect x="24" y="456" width="38" height="38" rx="13" fill="url(#a5)"/>
+      <text x="43" y="480" fill="#04121c" font-size="13" font-weight="700" text-anchor="middle">SC</text>
+      <text x="74" y="469" fill="#f2f9ff" font-size="13" font-weight="600">Sarah Chen</text>
+      <text x="74" y="487" fill="#63809e" font-size="11">Sent the notes over 📄</text>
+      <text x="296" y="469" fill="#63809e" font-size="10" text-anchor="end">Tue</text>
+
+      <rect x="24" y="522" width="38" height="38" rx="13" fill="url(#a1)"/>
+      <text x="43" y="546" fill="#04121c" font-size="13" font-weight="700" text-anchor="middle">JI</text>
+      <text x="74" y="535" fill="#f2f9ff" font-size="13" font-weight="600">Johirul Islam</text>
+      <text x="74" y="553" fill="#63809e" font-size="11">Let&#39;s catch up tomorrow</text>
+      <text x="296" y="535" fill="#63809e" font-size="10" text-anchor="end">Mon</text>
+    </g>
+
+    <!-- rail footer -->
+    <line x1="0" y1="676" x2="320" y2="676" stroke="#1a2c4a"/>
+    <rect x="20" y="694" width="34" height="34" rx="12" fill="url(#a2)"/>
+    <text x="37" y="716" fill="#fff" font-size="12" font-weight="700" text-anchor="middle">Y</text>
+    <circle cx="52" cy="724" r="5" fill="#37d67a" stroke="#0b1526" stroke-width="2.4"/>
+    <text x="64" y="707" fill="#2de0c4" font-size="8.5" font-weight="700" letter-spacing="1.2">SIGNED IN</text>
+    <text x="64" y="722" fill="#f2f9ff" font-size="12" font-weight="500">You</text>
+
+    <!-- =========================== THREAD =========================== -->
+    <line x1="320" y1="74" x2="1200" y2="74" stroke="#1a2c4a"/>
+    <rect x="348" y="18" width="38" height="38" rx="13" fill="url(#a1)"/>
+    <text x="367" y="42" fill="#04121c" font-size="13" font-weight="700" text-anchor="middle">AC</text>
+    <text x="398" y="32" fill="#f2f9ff" font-size="14" font-weight="600">Amelia Chen</text>
+    <text x="398" y="49" fill="#63809e" font-size="11">+880 1700 000 001</text>
+    <rect x="1030" y="26" width="66" height="22" rx="11" fill="#2de0c4" opacity=".13"/>
+    <circle cx="1044" cy="37" r="3.2" fill="#2de0c4"/>
+    <text x="1053" y="41" fill="#2de0c4" font-size="9" font-weight="700" letter-spacing=".8">LIVE</text>
+    <circle cx="1130" cy="37" r="15" fill="#11203a"/>
+    <text x="1130" y="42" fill="#93aec9" font-size="13" font-weight="700" text-anchor="middle">i</text>
+
+    <!-- day divider -->
+    <line x1="400" y1="118" x2="700" y2="118" stroke="#1a2c4a"/>
+    <text x="760" y="122" fill="#63809e" font-size="9.5" font-weight="700" letter-spacing="1.5" text-anchor="middle">TODAY</text>
+    <line x1="820" y1="118" x2="1120" y2="118" stroke="#1a2c4a"/>
+
+    <!-- them -->
+    <rect x="400" y="150" width="30" height="30" rx="10" fill="url(#a1)"/>
+    <text x="415" y="169" fill="#04121c" font-size="11" font-weight="700" text-anchor="middle">A</text>
+    <rect x="440" y="146" width="330" height="38" rx="16" fill="#18304f"/>
+    <rect x="440" y="168" width="16" height="16" fill="#18304f"/>
+    <text x="460" y="170" fill="#f2f9ff" font-size="13">That new direction feels so right ✦</text>
+
+    <rect x="440" y="190" width="244" height="34" rx="16" fill="#18304f"/>
+    <rect x="440" y="190" width="16" height="16" fill="#18304f"/>
+    <text x="460" y="212" fill="#f2f9ff" font-size="13">Want to see the prototype?</text>
+    <text x="446" y="240" fill="#63809e" font-size="10">9:41 AM</text>
+
+    <!-- own -->
+    <rect x="806" y="266" width="294" height="38" rx="16" fill="url(#own)"/>
+    <rect x="1084" y="288" width="16" height="16" fill="#12b5a0"/>
+    <text x="826" y="290" fill="#04121c" font-size="13" font-weight="500">Yes. Let&#39;s make it happen.</text>
+    <rect x="1110" y="270" width="30" height="30" rx="10" fill="url(#a2)"/>
+    <text x="1125" y="289" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">Y</text>
+    <text x="1094" y="322" fill="#63809e" font-size="10" text-anchor="end">9:42 AM</text>
+    <path d="M1100 318.5l3 3 5.5-5.5" stroke="#2de0c4" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- them again -->
+    <rect x="400" y="352" width="30" height="30" rx="10" fill="url(#a1)"/>
+    <text x="415" y="371" fill="#04121c" font-size="11" font-weight="700" text-anchor="middle">A</text>
+    <rect x="440" y="348" width="378" height="38" rx="16" fill="#18304f"/>
+    <rect x="440" y="370" width="16" height="16" fill="#18304f"/>
+    <text x="460" y="372" fill="#f2f9ff" font-size="13">Sending it now — it should land instantly ⚡</text>
+    <text x="446" y="404" fill="#63809e" font-size="10">9:43 AM</text>
+
+    <!-- own -->
+    <rect x="872" y="430" width="228" height="38" rx="16" fill="url(#own)"/>
+    <rect x="1084" y="452" width="16" height="16" fill="#12b5a0"/>
+    <text x="892" y="454" fill="#04121c" font-size="13" font-weight="500">Got it. Beautiful ✦</text>
+    <rect x="1110" y="434" width="30" height="30" rx="10" fill="url(#a2)"/>
+    <text x="1125" y="453" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">Y</text>
+    <text x="1094" y="486" fill="#63809e" font-size="10" text-anchor="end">9:43 AM</text>
+    <path d="M1100 482.5l3 3 5.5-5.5" stroke="#2de0c4" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- typing -->
+    <rect x="400" y="516" width="30" height="30" rx="10" fill="url(#a1)"/>
+    <text x="415" y="535" fill="#04121c" font-size="11" font-weight="700" text-anchor="middle">A</text>
+    <rect x="440" y="514" width="76" height="34" rx="16" fill="#18304f"/>
+    <circle cx="464" cy="531" r="3.4" fill="#93aec9" opacity=".45"/>
+    <circle cx="478" cy="531" r="3.4" fill="#93aec9" opacity=".75"/>
+    <circle cx="492" cy="531" r="3.4" fill="#93aec9"/>
+
+    <!-- composer -->
+    <line x1="320" y1="640" x2="1200" y2="640" stroke="#1a2c4a"/>
+    <rect x="400" y="666" width="720" height="50" rx="20" fill="#11203a" stroke="#22385c"/>
+    <text x="424" y="697" fill="#63809e" font-size="13">Message Amelia Chen</text>
+    <circle cx="1088" cy="691" r="19" fill="url(#own)"/>
+    <path d="M1080 691l16-6-6 6 6 6z" fill="#04121c"/>
+  </g>
+
+  <rect width="1200" height="750" rx="18" fill="none" stroke="#22385c" stroke-width="1.5"/>
+</svg>

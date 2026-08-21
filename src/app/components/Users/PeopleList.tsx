@@ -1,42 +1,28 @@
 "use client";
 
-import {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import Image from "next/image";
-import {
-  LogOut,
-  Search,
-  SearchX,
-  Users as UsersIcon,
-  WifiOff,
-  X,
-} from "lucide-react";
-import { AuthContext } from "@/src/app/AuthProvider";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Search, SearchX, Users as UsersIcon, WifiOff, X } from "lucide-react";
 import useUserDirectory, { PAGE_SIZE } from "@/src/hooks/useUserDirectory";
 import type { User } from "@/src/types/user";
-import UserAvatar from "./UserAvatar";
 import UserRow from "./UserRow";
 import UserRowSkeleton, { UserListSkeleton } from "./UserRowSkeleton";
 import "./userList.css";
 
-/** How far below the fold the sentinel starts loading, in px. */
+/** How far below the fold the sentinel starts revealing the next page. */
 const PREFETCH_MARGIN = 240;
 
-interface UserListPanelProps {
-  /** Mobile drawer close handler — the button is hidden on desktop. */
-  onClose?: () => void;
+interface PeopleListProps {
+  onSelect?: (user: User) => void;
+  /** Id of the person whose chat is currently opening. */
+  pendingUserId?: string | null;
 }
 
-export default function UserListPanel({ onClose }: UserListPanelProps) {
-  const { user: currentUser, logOut } = useContext(AuthContext);
-
+/**
+ * Searchable directory of everyone on NexaChat: 20 rows at a time, more as the
+ * rail scrolls, skeletons while anything is in flight.
+ */
+export default function PeopleList({ onSelect, pendingUserId }: PeopleListProps) {
   const [query, setQuery] = useState("");
-  const [activeUserId, setActiveUserId] = useState<string | null>(null);
 
   const {
     users,
@@ -53,8 +39,8 @@ export default function UserListPanel({ onClose }: UserListPanelProps) {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const [sentinel, setSentinel] = useState<HTMLDivElement | null>(null);
 
-  // Infinite scroll. Observing against the scroll container (not the viewport)
-  // is what makes this work inside a fixed-height rail.
+  // Observing against the scroll container (not the viewport) is what makes
+  // infinite scroll work inside a fixed-height rail.
   useEffect(() => {
     if (!sentinel || !hasMore || isInitialLoading) return;
 
@@ -69,15 +55,9 @@ export default function UserListPanel({ onClose }: UserListPanelProps) {
     return () => observer.disconnect();
   }, [sentinel, hasMore, isInitialLoading, revealNextPage]);
 
-  // A new search resets the window, so send the reader back to the top of it.
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: 0 });
   }, [query]);
-
-  const handleSelect = useCallback((user: User) => {
-    setActiveUserId(user._id);
-    // Wiring point for `POST /conversations` once the chat view lands.
-  }, []);
 
   const clearQuery = useCallback(() => setQuery(""), []);
 
@@ -87,37 +67,7 @@ export default function UserListPanel({ onClose }: UserListPanelProps) {
     !isInitialLoading && !showSearchSkeleton && !error && users.length === 0;
 
   return (
-    <div className="ul-rail">
-      {/* ---------------------------------------------------------- brand */}
-      <div className="ul-brand">
-        <Image
-          className="ul-brand-mark"
-          src="/nexaChat.png"
-          alt=""
-          width={34}
-          height={34}
-          priority
-        />
-        <span className="ul-brand-text">
-          <span className="ul-wordmark">
-            Nexa<span>Chat</span>
-          </span>
-          <span className="ul-brand-sub">Directory</span>
-        </span>
-
-        {onClose && (
-          <button
-            type="button"
-            className="ul-close lg:hidden"
-            onClick={onClose}
-            aria-label="Close menu"
-          >
-            <X size={18} />
-          </button>
-        )}
-      </div>
-
-      {/* --------------------------------------------------------- search */}
+    <>
       <div className="ul-search">
         <div className="ul-field">
           <Search className="ul-field-icon" size={16} aria-hidden="true" />
@@ -153,8 +103,7 @@ export default function UserListPanel({ onClose }: UserListPanelProps) {
               </>
             ) : (
               <>
-                <b>{totalMatches}</b>{" "}
-                {totalMatches === 1 ? "person" : "people"}
+                <b>{totalMatches}</b> {totalMatches === 1 ? "person" : "people"}
               </>
             )}
           </span>
@@ -162,7 +111,6 @@ export default function UserListPanel({ onClose }: UserListPanelProps) {
         </p>
       </div>
 
-      {/* ----------------------------------------------------------- list */}
       <div
         className="ul-scroll"
         ref={scrollRef}
@@ -183,9 +131,7 @@ export default function UserListPanel({ onClose }: UserListPanelProps) {
           </div>
         )}
 
-        {(isInitialLoading || showSearchSkeleton) && (
-          <UserListSkeleton count={8} />
-        )}
+        {(isInitialLoading || showSearchSkeleton) && <UserListSkeleton count={8} />}
 
         {showEmptyState && (
           <div className="ul-state">
@@ -206,11 +152,7 @@ export default function UserListPanel({ onClose }: UserListPanelProps) {
               )}
             </span>
             {trimmedQuery && (
-              <button
-                type="button"
-                className="ul-state-btn"
-                onClick={clearQuery}
-              >
+              <button type="button" className="ul-state-btn" onClick={clearQuery}>
                 Clear search
               </button>
             )}
@@ -225,8 +167,8 @@ export default function UserListPanel({ onClose }: UserListPanelProps) {
                 user={user}
                 query={trimmedQuery}
                 index={index % PAGE_SIZE}
-                isActive={user._id === activeUserId}
-                onSelect={handleSelect}
+                isActive={user._id === pendingUserId}
+                onSelect={onSelect}
               />
             ))}
 
@@ -237,7 +179,6 @@ export default function UserListPanel({ onClose }: UserListPanelProps) {
           </ul>
         )}
 
-        {/* Sentinel: crossing it reveals the next page. */}
         {hasMore && !isInitialLoading && (
           <div ref={setSentinel} style={{ height: 1 }} aria-hidden="true" />
         )}
@@ -252,34 +193,6 @@ export default function UserListPanel({ onClose }: UserListPanelProps) {
             : `${users.length} of ${totalMatches} people shown`}
         </span>
       </div>
-
-      {/* ----------------------------------------------------------- foot */}
-      <div className="ul-foot">
-        <div className="ul-me">
-          {currentUser && (
-            <UserAvatar
-              id={currentUser._id}
-              name={currentUser.name}
-              showPresence
-            />
-          )}
-          <span className="ul-me-body">
-            <span className="ul-me-label">Signed in</span>
-            <span className="ul-me-name">
-              {currentUser?.name ?? "NexaChat user"}
-            </span>
-          </span>
-          <button
-            type="button"
-            className="ul-logout"
-            onClick={logOut}
-            aria-label="Log out"
-            title="Log out"
-          >
-            <LogOut size={15} />
-          </button>
-        </div>
-      </div>
-    </div>
+    </>
   );
 }

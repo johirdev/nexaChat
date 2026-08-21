@@ -4,6 +4,7 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { AuthContext } from "@/src/app/AuthProvider";
 import { getApiErrorMessage } from "@/src/lib/errors";
+import { queryKeys } from "@/src/lib/queryKeys";
 import { searchUsers } from "@/src/services/users";
 import type { User } from "@/src/types/user";
 import useDebouncedValue from "./useDebouncedValue";
@@ -61,7 +62,7 @@ export function useUserDirectory(rawQuery: string): UserDirectory {
 
   // The directory, cached once. Doubles as the corpus for client-side filtering.
   const directory = useQuery({
-    queryKey: ["users", "directory"],
+    queryKey: queryKeys.userDirectory,
     queryFn: ({ signal }) => searchUsers("", signal),
     staleTime: 60_000,
   });
@@ -69,7 +70,7 @@ export function useUserDirectory(rawQuery: string): UserDirectory {
   // The server's own prefix match. It can surface people who fall outside the
   // 50-record directory page, so it is merged in rather than replaced.
   const remoteMatches = useQuery({
-    queryKey: ["users", "search", debouncedQuery],
+    queryKey: queryKeys.userSearch(debouncedQuery),
     queryFn: ({ signal }) => searchUsers(debouncedQuery, signal),
     enabled: debouncedQuery.length > 0,
     placeholderData: keepPreviousData,

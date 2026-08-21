@@ -1,11 +1,5 @@
 "use client";
 
-/**
- * A deterministic avatar: the same person always gets the same colours, on every
- * device and every reload, without the API sending an image. The hash is over
- * the immutable `_id` rather than the name, so a rename never re-colours a face
- * the reader has already learned.
- */
 
 const GRADIENTS: readonly [string, string][] = [
   ["#2de0c4", "#1d9bf0"],
@@ -38,23 +32,70 @@ interface UserAvatarProps {
   name: string;
   /** Renders the presence dot. Presence is not in the API yet — off by default. */
   showPresence?: boolean;
+  /** Makes the crown a profile trigger when the avatar belongs to the signed-in user. */
+  onPresenceClick?: () => void;
 }
 
 export default function UserAvatar({
   id,
   name,
   showPresence = false,
+  onPresenceClick,
 }: UserAvatarProps) {
   const [from, to] = GRADIENTS[hash(id) % GRADIENTS.length];
 
   return (
     <span
-      className="ul-avatar"
+      className={`ul-avatar${onPresenceClick ? " is-clickable" : ""}`}
       style={{ background: `linear-gradient(135deg, ${from}, ${to})` }}
-      aria-hidden="true"
+      aria-hidden={onPresenceClick ? undefined : true}
+      role={onPresenceClick ? "button" : undefined}
+      tabIndex={onPresenceClick ? 0 : undefined}
+      onClick={onPresenceClick}
+      onKeyDown={
+        onPresenceClick
+          ? (event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                onPresenceClick();
+              }
+            }
+          : undefined
+      }
     >
       {initialsOf(name)}
-      {showPresence && <i className="ul-avatar-dot" />}
+      {showPresence && (
+        <button
+          type="button"
+          className={`ul-avatar-crown${onPresenceClick ? " is-clickable" : ""}`}
+          onClick={(event) => {
+            event.stopPropagation();
+            onPresenceClick?.();
+          }}
+          aria-label={onPresenceClick ? "Open my profile" : undefined}
+          tabIndex={onPresenceClick ? 0 : -1}
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M3 8L7 11L12 5L17 11L21 8L19 17H5L3 8Z"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M6 19H18"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+            />
+          </svg>
+        </button>
+      )}
     </span>
   );
 }
