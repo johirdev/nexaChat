@@ -17,7 +17,7 @@ Phone-number auth · searchable directory · live delivery over WebSocket · gro
 | 🎨 **Landing page** (Part 2) | **https://nexachatbangladesh.vercel.app** |
 | 🚀 **Chat application** (Part 1) | **https://nexachatbangladesh.vercel.app/dashboard** |
 | 📘 **User guide** | https://nexachatbangladesh.vercel.app/guide |
-| 📄 **API documentation** | [`https://winter-crater-185123.docs.buildwithfern.com/nexa-chat/users/users`] |
+| 📄 **API documentation** | https://winter-crater-185123.docs.buildwithfern.com/nexa-chat/users/users |
 
 > Both parts ship from one deployment: the landing page is the root route, the
 > chat application lives at `/dashboard`.
