@@ -24,7 +24,7 @@ const LINKS = [
 const STUCK_AFTER = 12;
 
 export default function Navbar() {
-  const { token } = useContext(AuthContext);
+  const { token, loading } = useContext(AuthContext);
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isStuck, setIsStuck] = useState(false);
@@ -78,15 +78,25 @@ export default function Navbar() {
         </nav>
 
         <div className="ln-nav-right">
-          {!isSignedIn && (
-            <Link href="/login" className="ln-nav-signin">
-              Sign in
-            </Link>
-          )}
+          {loading ? (
+            <span
+              className="ln-nav-auth-skeleton"
+              aria-label="Loading account actions"
+              role="status"
+            />
+          ) : (
+            <>
+              {!isSignedIn && (
+                <Link href="/login" className="ln-nav-signin">
+                  Sign in
+                </Link>
+              )}
 
-          <Link href={ctaHref} className="ln-btn ln-btn-primary ln-nav-cta">
-            {ctaLabel} <ArrowRight size={15} />
-          </Link>
+              <Link href={ctaHref} className="ln-btn ln-btn-primary ln-nav-cta">
+                {ctaLabel} <ArrowRight size={15} />
+              </Link>
+            </>
+          )}
 
           <button
             type="button"
@@ -101,7 +111,10 @@ export default function Navbar() {
         </div>
       </div>
 
-      <div id="ln-mobile-menu" className={`ln-drawer${isOpen ? " is-open" : ""}`}>
+      <div
+        id="ln-mobile-menu"
+        className={`ln-drawer${isOpen ? " is-open" : ""}`}
+      >
         {LINKS.map((link) => (
           <Link
             key={link.href}
