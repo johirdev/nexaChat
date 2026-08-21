@@ -2,8 +2,8 @@
 "use client";
 
 import { useContext, useState } from "react";
-import "./admin.css";
-import AuthProvider, { AuthContext } from "./AuthProvider";
+import "./dashboard.css";
+import AuthProvider, { AuthContext } from "../AuthProvider";
 
 import Sidebar from "../Layout/Admin/Sidebar/Sidebar";
 import Navbar from "../Layout/Admin/Navbar/Navbar";

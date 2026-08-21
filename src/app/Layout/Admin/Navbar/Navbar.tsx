@@ -2,18 +2,7 @@
 
 import { useState, useRef, useEffect, useContext } from "react";
 import Icons from "../../utils/icons";
-import { AuthContext } from "@/src/app/admin/AuthProvider";
-
-interface Notification {
-  id: string;
-  title: string;
-  message: string;
-  time: string;
-  read: boolean;
-}
-
-// Replace with real data from your API/store
-const notifications: Notification[] = [];
+import { AuthContext } from "@/src/app/AuthProvider";
 
 interface NavbarProps {
   onMenuToggle: () => void;
@@ -24,22 +13,15 @@ export default function Navbar({
   onMenuToggle,
   pageTitle = "Dashboard",
 }: NavbarProps) {
-  const { adminData, logOut } = useContext(AuthContext);
-
-  const [notifOpen, setNotifOpen] = useState(false);
+  const { user, logOut } = useContext(AuthContext);
   const [profileOpen, setProfileOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
 
-  const notifRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
-
-  const unreadCount = notifications.filter((n) => !n.read).length;
 
   // Close dropdowns on outside click
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (notifRef.current && !notifRef.current.contains(e.target as Node))
-        setNotifOpen(false);
       if (profileRef.current && !profileRef.current.contains(e.target as Node))
         setProfileOpen(false);
     };
@@ -61,7 +43,7 @@ export default function Navbar({
         <button
           aria-label="Toggle menu"
           onClick={onMenuToggle}
-          className="lg:hidden flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 transition-all"
+          className="lg:hidden shrink-0 flex items-center justify-center w-9 h-9 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 transition-all"
         >
           {/* <Icons.Menu className="w-5 h-5" /> */} Menu
         </button>
@@ -80,7 +62,7 @@ export default function Navbar({
       </div>
 
       {/* Right — search toggle (mobile) + notifications + profile */}
-      <div className="flex items-center gap-1.5 sm:gap-3 flex-shrink-0">
+      <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
         {/* Search toggle — mobile only */}
         <button
           aria-label="Search"
@@ -107,7 +89,6 @@ export default function Navbar({
           <button
             onClick={() => {
               setProfileOpen((p) => !p);
-              setNotifOpen(false);
             }}
             className="flex items-center gap-2 px-1.5 sm:px-3 py-1.5 rounded-xl transition-all"
             style={{
@@ -116,23 +97,23 @@ export default function Navbar({
             }}
           >
             <div
-              className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0"
+              className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0"
               style={{
                 background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
                 boxShadow: "0 0 12px rgba(99,102,241,0.4)",
               }}
             >
-              {adminData?.name?.slice(0, 1)?.toUpperCase() || "AD"}
+              {user?.name?.slice(0, 1)?.toUpperCase() || "?"}
             </div>
             <div className="hidden sm:block text-left min-w-0">
               <p
-                className="text-white text-sm font-medium leading-none truncate max-w-[9rem]"
+                className="text-white text-sm font-medium leading-none truncate max-w-36"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
-                {adminData?.name}
+                {user?.name || "NexaChat user"}
               </p>
-              <p className="text-gray-500 text-xs mt-0.5 truncate max-w-[9rem]">
-                {adminData?.role}
+              <p className="text-gray-500 text-xs mt-0.5 truncate max-w-36">
+                {user?.phone}
               </p>
             </div>
             <span className="text-gray-500 hidden sm:block">
@@ -158,10 +139,10 @@ export default function Navbar({
                   className="text-white text-sm font-medium truncate"
                   style={{ fontFamily: "'DM Sans', sans-serif" }}
                 >
-                  {adminData?.role}
+                  {user?.name || "NexaChat user"}
                 </p>
                 <p className="text-gray-500 text-xs mt-0.5 truncate">
-                  {adminData?.email}
+                  {user?.phone}
                 </p>
               </div>
               <div className="p-2 space-y-0.5">

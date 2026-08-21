@@ -4,6 +4,7 @@ import "../globals.css";
 
 import Navbar from "../Layout/Client/Navbar/Navbar";
 import Footer from "../Layout/Client/Footer/Footer";
+import AuthProvider from "../AuthProvider";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -40,11 +41,11 @@ export default function SiteLayout({
     <div
       className={`${montserrat.variable} min-h-full flex flex-col font-montserrat`}
     >
-      <Navbar />
-
-      <main className="flex-1">{children}</main>
-
-      <Footer />
+      <AuthProvider>
+        <Navbar />
+        <main className="flex-1">{children}</main>
+        <Footer />
+      </AuthProvider>
     </div>
   );
 }

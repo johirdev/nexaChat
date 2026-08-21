@@ -1,12 +1,15 @@
 "use client";
 
+import { AuthContext } from "@/src/app/AuthProvider";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const { user, token, logOut } = useContext(AuthContext);
+  console.log(user, token, "sdfsdfkj");
   return (
     <header className="site-nav">
       <div className="max-width site-nav-inner">
@@ -17,22 +20,36 @@ const Navbar = () => {
           </span>
         </Link>
         <nav className={open ? "site-nav-links is-open" : "site-nav-links"}>
-          <a href="#features" onClick={() => setOpen(false)}>
+          <Link href="#features" onClick={() => setOpen(false)}>
             Features
-          </a>
-          <a href="#why" onClick={() => setOpen(false)}>
+          </Link>
+          <Link href="#why" onClick={() => setOpen(false)}>
             Why NexaChat
-          </a>
-          <a href="#preview" onClick={() => setOpen(false)}>
+          </Link>
+          <Link href="#preview" onClick={() => setOpen(false)}>
             Preview
-          </a>
-          <a
-            className="site-nav-cta"
-            href="#start"
-            onClick={() => setOpen(false)}
-          >
-            Start chatting <span>↗</span>
-          </a>
+          </Link>
+          {token ? (
+            <>
+              <Link
+                className="site-nav-cta"
+                href="/dashboard"
+                onClick={() => setOpen(false)}
+              >
+                Start chatting <span>↗</span>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link
+                className="site-nav-cta"
+                href="/login"
+                onClick={() => setOpen(false)}
+              >
+                Login
+              </Link>
+            </>
+          )}
         </nav>
         <button
           className="site-menu"

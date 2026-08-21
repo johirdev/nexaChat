@@ -30,7 +30,7 @@ const features = [
   },
 ];
 
-export default function Home() {
+export default function HomeLandingPage() {
   return (
     <div id="top" className="site-home">
       <section className="site-hero">

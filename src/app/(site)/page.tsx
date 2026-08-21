@@ -1,8 +1,9 @@
+import HomeLandingPage from "../components/LandingPages/LandingPage";
+
 export default function Home() {
   return (
-    <div className="min-h-[100vh]">
-      Client site
-      <p>commit checking</p>
+    <div className="">
+      <HomeLandingPage />
     </div>
   );
 }
