@@ -1,0 +1,149 @@
+/* ==========================================================================
+   ADMIN PANEL — GLOBAL THEME
+   Dark theme only (no light-theme variant, by design).
+   Change a value here once -> it updates everywhere the utility class is used.
+   Import this ONCE in your root layout, e.g. src/app/layout.tsx:
+       import "./admin-theme.css";  // adjust path to where you place this file
+   ========================================================================== */
+
+:root {
+  /* ---------- Font ---------- */
+  --font-primary: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+
+  /* ---------- Surfaces ---------- */
+  --bg-app: #0b1120;       /* page background */
+  --bg-sidebar: #0f1729;   /* sidebar background */
+  --bg-card: #141b2d;      /* card / panel background */
+  --bg-elevated: #1b2338;  /* zebra-striped rows, hovered surfaces */
+  --bg-input: #10182b;     /* input fields */
+  --bg-hover: #1c2540;     /* generic hover background */
+
+  /* ---------- Borders ---------- */
+  --border-color: #2a3552;
+  --border-color-strong: #3a4568;
+
+  /* ---------- Text ---------- */
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  /* ---------- Brand / accent colors ---------- */
+  --accent-primary: #6d4cef;        /* main brand purple (buttons, active states) */
+  --accent-primary-hover: #7e60f4;
+  --accent-blue: #3b82f6;
+  --accent-blue-hover: #2563eb;
+  --accent-green: #10b981;
+  --accent-green-hover: #059669;
+  --accent-red: #ef4444;
+  --accent-red-hover: #dc2626;
+  --accent-orange: #ffa41c;
+
+  --accent-purple-soft: rgba(109, 76, 239, 0.15);
+  --accent-blue-soft: rgba(59, 130, 246, 0.12);
+  --accent-green-soft: rgba(16, 185, 129, 0.12);
+
+  /* ---------- Radius ---------- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+}
+
+/* Apply base font + colors to the whole admin area */
+.admin-panel,
+.admin-panel body {
+  font-family: var(--font-primary);
+  background: var(--bg-app);
+  color: var(--text-primary);
+}
+
+/* ---------- Surface utilities ---------- */
+.bg-app { background: var(--bg-app); }
+.bg-sidebar { background: var(--bg-sidebar); }
+.bg-card { background: var(--bg-card); }
+.bg-elevated { background: var(--bg-elevated); }
+.bg-input-field { background: var(--bg-input); }
+
+/* ---------- Border utilities ---------- */
+.border-default { border: 1px solid var(--border-color); }
+.border-default-t { border-top: 1px solid var(--border-color); }
+.border-default-b { border-bottom: 1px solid var(--border-color); }
+
+/* ---------- Text utilities ---------- */
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-muted { color: var(--text-muted); }
+.text-danger { color: var(--accent-red); }
+.text-success { color: var(--accent-green); }
+.text-highlight { color: var(--accent-blue); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  border-radius: var(--radius-sm);
+  font-family: var(--font-primary);
+  font-weight: 500;
+  transition: background 0.15s ease, opacity 0.15s ease, border-color 0.15s ease;
+}
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.btn-primary { background: var(--accent-primary); color: #fff; }
+.btn-primary:hover:not(:disabled) { background: var(--accent-primary-hover); }
+
+.btn-blue { background: var(--accent-blue); color: #fff; }
+.btn-blue:hover:not(:disabled) { background: var(--accent-blue-hover); }
+
+.btn-green { background: var(--accent-green); color: #fff; }
+.btn-green:hover:not(:disabled) { background: var(--accent-green-hover); }
+
+.btn-danger { background: var(--accent-red); color: #fff; }
+.btn-danger:hover:not(:disabled) { background: var(--accent-red-hover); }
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border-color-strong);
+  color: var(--text-primary);
+}
+.btn-outline:hover:not(:disabled) { background: var(--bg-hover); }
+
+/* ---------- Inputs ---------- */
+.input-field {
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: var(--radius-sm);
+}
+.input-field::placeholder { color: var(--text-muted); }
+.input-field:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px var(--accent-blue-soft);
+}
+.input-field.input-error { border-color: var(--accent-red); }
+
+/* ---------- Role pills (used in create/edit admin form) ---------- */
+.role-pill {
+  border-radius: 999px;
+  border: 1.5px solid var(--border-color-strong);
+  color: var(--text-secondary);
+  background: transparent;
+  transition: all 0.15s ease;
+}
+.role-pill.active-admin {
+  background: var(--accent-blue-soft);
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+}
+.role-pill.active-superadmin {
+  background: var(--accent-purple-soft);
+  border-color: var(--accent-primary);
+  color: #a78bfa;
+}
+.role-pill.active-view {
+  background: var(--accent-green-soft);
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+}
+
+/* ---------- Table ---------- */
+.table-row-alt { background: var(--bg-elevated); }
+.table-row-hover:hover { background: var(--bg-hover); }
