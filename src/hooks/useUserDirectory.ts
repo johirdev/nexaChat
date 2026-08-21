@@ -12,14 +12,6 @@ import useDebouncedValue from "./useDebouncedValue";
 /** How many people are revealed per page. */
 export const PAGE_SIZE = 20;
 
-/**
- * The API has no cursor pagination (see `services/users.ts`), so page two comes
- * out of memory and would otherwise snap in with no perceptible load. Holding
- * the skeleton for a beat keeps the reveal readable and keeps this component's
- * contract identical to the one it will have the day `/users/search` grows a
- * real cursor — at which point `revealNextPage` becomes `fetchNextPage` and
- * this constant goes away.
- */
 const PAGE_REVEAL_MS = 320;
 
 const SEARCH_DEBOUNCE_MS = 300;
@@ -28,11 +20,6 @@ function normalisePhone(value: string): string {
   return value.replace(/\D/g, "");
 }
 
-/**
- * Case-insensitive substring match on the name, plus a digits-only match on the
- * phone number so "1700" finds "+8801700000001". The server can only do a
- * case-sensitive prefix match, so this is what makes search feel correct.
- */
 function matches(user: User, needle: string): boolean {
   if (user.name.toLowerCase().includes(needle.toLowerCase())) return true;
 
