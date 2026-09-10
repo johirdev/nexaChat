@@ -133,9 +133,26 @@ const LoginForm = () => {
 
           <div className="ln-auth-proof">
             <span className="ln-faces" aria-hidden="true">
-              <i style={{ background: "linear-gradient(135deg,#1fd1b4,#35d0e0)" }}>J</i>
-              <i style={{ background: "linear-gradient(135deg,#35d0e0,#4a8cf7)" }}>M</i>
-              <i style={{ background: "linear-gradient(135deg,#4a8cf7,#8b4dff)", color: "#fff" }}>
+              <i
+                style={{
+                  background: "linear-gradient(135deg,#1fd1b4,#35d0e0)",
+                }}
+              >
+                J
+              </i>
+              <i
+                style={{
+                  background: "linear-gradient(135deg,#35d0e0,#4a8cf7)",
+                }}
+              >
+                M
+              </i>
+              <i
+                style={{
+                  background: "linear-gradient(135deg,#4a8cf7,#8b4dff)",
+                  color: "#fff",
+                }}
+              >
                 S
               </i>
               <i style={{ background: "#131d3d", color: "#35d0e0" }}>+</i>
@@ -149,13 +166,7 @@ const LoginForm = () => {
         {/* -------------------------------------------------------- card */}
         <div className="ln-auth-card">
           <Link href="/" className="ln-auth-mark" aria-label="NexaChat home">
-            <Image
-              src="/nexaChat.png"
-              alt=""
-              width={58}
-              height={58}
-              priority
-            />
+            <Image src="/nexaChat.png" alt="" width={58} height={58} priority />
             <span>
               Nexa<em>Chat</em>
             </span>
@@ -171,7 +182,11 @@ const LoginForm = () => {
             Use your phone number to sign in or create your NexaChat account.
           </p>
 
-          <form className="ln-auth-form" onSubmit={handleSubmit(onSubmit)} noValidate>
+          <form
+            className="ln-auth-form"
+            onSubmit={handleSubmit(onSubmit)}
+            noValidate
+          >
             <div className="ln-field">
               <label className="ln-label" htmlFor="name">
                 Your name
@@ -244,6 +259,13 @@ const LoginForm = () => {
               )}
             </button>
           </form>
+
+          <p className="ln-auth-foot">
+            Your Name :{" "}
+            <span className="font-bold text-white">Md. Johirul Islam</span>{" "}
+            <br />
+            Password : <span className="font-bold text-white">01824842336</span>
+          </p>
 
           <p className="ln-auth-foot">
             New phone numbers are registered automatically. By continuing you
